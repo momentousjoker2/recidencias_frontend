@@ -1,7 +1,22 @@
 {
-  "name": "proyecto_v01",
-  "version": "0.1.0",
+  "name": "cc",
+  "version": "1.0.0",
+  "description": "Programa de creditos complementarios",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "contributors": [
+    {
+      "name": "Cristian Emmanuel Amezcua Moreno",
+      "email": "camezcuamoreno@gmail.com"
+    },
+    {
+      "name": "Jessica Jazmin González Romero",
+      "email": "joe@whatever.com"
+    }
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

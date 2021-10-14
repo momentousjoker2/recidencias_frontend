@@ -1,17 +1,51 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <link href="https://framework-gb.cdn.gob.mx/gm/v4/css/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="<%= BASE_URL %>index.css" type="text/css">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+
+<body>
+  <nav class="navbar navbar-icon">
+    <section class="container" >
+      <div class="row">
+        <div class="col-sx-12 col-sm-8">
+          <div class="row">
+            <div class="col-xs-4">
+              <a href="https://www.gob.mx/">
+                <img class="center-block img-responsive" src="<%= BASE_URL %>img/gob-mx-logo.png" alt="Gobierno de México">
+              </a>
+            </div>
+
+            <div class="col-xs-4">
+              <a href="https://www.gob.mx/sep">
+                <img class="center-block img-responsive" src="<%= BASE_URL %>img/sep.png" alt="Educación">
+              </a>
+            </div>
+
+            <div class="col-xs-4">
+              <a href="https://cdguzman.tecnm.mx/pag/">
+                <img class="center-block img-responsive" src="<%= BASE_URL %>img/tecnm-logo.png" alt="TecNM">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </nav>
+
+  <main class="page">
+    <div class="container main-container" id="app"> </div>
+  </main>
+  
+  <script src="https://framework-gb.cdn.gob.mx/gm/v4/js/gobmx.js"></script>
+    
+</body>
+
 </html>
