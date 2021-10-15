@@ -7,6 +7,7 @@ import addEmpleado from '../views/addEmpleado.vue'
 import Carreras from '../views/Carreras.vue'
 import TipoProyecto from '../views/TipoProyecto'
 import addTipoProyecto from '../views/addTipoProyecto'
+import Departamentos from '../views/Departamentos'
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
     path: '/addTipoProyecto',
     name: 'addTipoProyecto',
     component: addTipoProyecto,
+  },
+   {
+    path: '/Departamentos',
+    name: 'Departamentos',
+    component: Departamentos,
   },
 ]
 
