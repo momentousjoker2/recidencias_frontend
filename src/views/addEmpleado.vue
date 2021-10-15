@@ -1,5 +1,5 @@
 <template>
-<h2 align="center">Detalle de Alumno</h2>
+<h2 align="center">Detalle de Empleado</h2>
 <br/>
 <div class="row">
     <div class="col-2">
@@ -8,7 +8,7 @@
     <div class="col-8">
         <form>
             <div class="form-group">
-                <label for="disabledTextInput">Numero de Control:</label>
+                <label for="disabledTextInput">Clave de Empleado:</label>
                 <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
             </div>
             <div class="form-group">

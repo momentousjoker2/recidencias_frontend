@@ -2,6 +2,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import index from '../views/index.vue'
 import Alumno from '../views/Alumno.vue'
 import addAlumno from '../views/addAlumno.vue'
+import Empleado from '../views/Empleado.vue'
+import addEmpleado from '../views/addEmpleado.vue'
 
 const routes = [
   {
@@ -19,7 +21,16 @@ const routes = [
     name: 'addAlumno',
     component: addAlumno,
   },
-  
+  {
+    path: '/Empleado',
+    name: 'Empleado',
+    component: Empleado,
+  },
+  {
+    path: '/addEmpleado',
+    name: 'addEmpleado',
+    component: addEmpleado,
+  },
 ]
 
 const router = createRouter({
