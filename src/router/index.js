@@ -5,6 +5,8 @@ import addAlumno from '../views/addAlumno.vue'
 import Empleado from '../views/Empleado.vue'
 import addEmpleado from '../views/addEmpleado.vue'
 import Carreras from '../views/Carreras.vue'
+import TipoProyecto from '../views/TipoProyecto'
+import addTipoProyecto from '../views/addTipoProyecto'
 
 const routes = [
   {
@@ -36,6 +38,16 @@ const routes = [
     path: '/Carreras',
     name: 'Carreras',
     component: Carreras,
+  },
+  {
+    path: '/TipoProyecto',
+    name: 'TipoProyecto',
+    component: TipoProyecto,
+  },
+  {
+    path: '/addTipoProyecto',
+    name: 'addTipoProyecto',
+    component: addTipoProyecto,
   },
 ]
 
