@@ -5,6 +5,7 @@
     <router-link to="/addAlumno">Detalle Alumno</router-link>|
     <router-link to="/Empleado">Empleado</router-link>|
     <router-link to="/addEmpleado">Detalle Empleado</router-link>|
+    <router-link to="/Carreras">Carreras</router-link>|
   </div>
   <router-view/>
 </template>

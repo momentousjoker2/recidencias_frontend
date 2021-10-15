@@ -4,6 +4,7 @@ import Alumno from '../views/Alumno.vue'
 import addAlumno from '../views/addAlumno.vue'
 import Empleado from '../views/Empleado.vue'
 import addEmpleado from '../views/addEmpleado.vue'
+import Carreras from '../views/Carreras.vue'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/addEmpleado',
     name: 'addEmpleado',
     component: addEmpleado,
+  },
+  {
+    path: '/Carreras',
+    name: 'Carreras',
+    component: Carreras,
   },
 ]
 
