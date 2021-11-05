@@ -1,65 +1,52 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import index from '../views/index.vue'
-import Alumno from '../views/Alumno.vue'
-import addAlumno from '../views/addAlumno.vue'
-import Empleado from '../views/Empleado.vue'
-import addEmpleado from '../views/addEmpleado.vue'
-import Carreras from '../views/Carreras.vue'
-import TipoProyecto from '../views/TipoProyecto'
-import addTipoProyecto from '../views/addTipoProyecto'
-import Departamentos from '../views/Departamentos'
+import AprobarSolicitud from '../views/AprobarSolicitud.vue'
+import RegistroAlumnos from '../views/RegistroAlumnos.vue'
+import EnviarSolicitud from '../views/EnviarSolicitud.vue'
+import RegistroActividad from '../views/RegistroActividad.vue'
+import tipoProyecto from '../views/tipoProyecto.vue'
+import CalificarActividad from '../views/CalificarActividad.vue'
+import Consultas from '../views/Consultas.vue'
 
-const routes = [
-  {
-    path: '/',
-    name: 'index',
-    component: index
-  },
-  {
-    path: '/Alumno',
-    name: 'Alumno',
-    component: Alumno,
-  },
-  {
-    path: '/addAlumno',
-    name: 'addAlumno',
-    component: addAlumno,
-  },
-  {
-    path: '/Empleado',
-    name: 'Empleado',
-    component: Empleado,
-  },
-  {
-    path: '/addEmpleado',
-    name: 'addEmpleado',
-    component: addEmpleado,
-  },
-  {
-    path: '/Carreras',
-    name: 'Carreras',
-    component: Carreras,
-  },
-  {
-    path: '/TipoProyecto',
-    name: 'TipoProyecto',
-    component: TipoProyecto,
-  },
-  {
-    path: '/addTipoProyecto',
-    name: 'addTipoProyecto',
-    component: addTipoProyecto,
-  },
-   {
-    path: '/Departamentos',
-    name: 'Departamentos',
-    component: Departamentos,
-  },
+const routes = [{
+        path: '/AprobarSolicitud',
+        name: 'AprobarSolicitud',
+        component: AprobarSolicitud,
+    },
+    {
+        path: '/RegistroAlumnos',
+        name: 'RegistroAlumnos',
+        component: RegistroAlumnos,
+    },
+    {
+        path: '/EnviarSolicitud',
+        name: 'EnviarSolicitud',
+        component: EnviarSolicitud,
+    },
+    {
+        path: '/RegistroActividad',
+        name: 'RegistroActividad',
+        component: RegistroActividad,
+    },
+    {
+        path: '/tipoProyecto',
+        name: 'tipoProyecto',
+        component: tipoProyecto,
+    },
+    {
+        path: '/CalificarActividad',
+        name: 'CalificarActividad',
+        component: CalificarActividad,
+    },
+    {
+        path: '/Consultas',
+        name: 'Consultas',
+        component: Consultas,
+    },
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes
+    history: createWebHashHistory(),
+    routes
 })
 
 export default router

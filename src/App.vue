@@ -15,10 +15,64 @@
       </li>
 
       <li class="menu--item">
-        <router-link to="/Alumno">
+        <router-link to="/AprobarSolicitud">
         <a href="#" class="menu--link" title="Item 3">
           <i class="menu--icon fa fa-fw fa-cog"></i>
-          <span class="menu--label">Item 3</span>
+          <span class="menu--label">AprobarSolicitud</span>
+        </a>
+        </router-link>
+      </li>
+
+      <li class="menu--item">
+        <router-link to="/RegistroAlumnos">
+        <a href="#" class="menu--link" title="Item 3">
+          <i class="menu--icon fa fa-fw fa-cog"></i>
+          <span class="menu--label">Registrar alumnos a actividad</span>
+        </a>
+        </router-link>
+      </li>
+
+      <li class="menu--item">
+        <router-link to="/EnviarSolicitud">
+        <a href="#" class="menu--link" title="Item 3">
+          <i class="menu--icon fa fa-fw fa-cog"></i>
+          <span class="menu--label">Enviar Solicitud</span>
+        </a>
+        </router-link>
+      </li>
+
+      <li class="menu--item">
+        <router-link to="/RegistroActividad">
+        <a href="#" class="menu--link" title="Item 3">
+          <i class="menu--icon fa fa-fw fa-cog"></i>
+          <span class="menu--label">Registro de Actividad</span>
+        </a>
+        </router-link>
+      </li>
+
+      <li class="menu--item">
+        <router-link to="/tipoProyecto">
+        <a href="#" class="menu--link" title="Item 3">
+          <i class="menu--icon fa fa-fw fa-cog"></i>
+          <span class="menu--label">Registro de Tipo de Proyecto</span>
+        </a>
+        </router-link>
+      </li>
+
+      <li class="menu--item">
+        <router-link to="/CalificarActividad">
+        <a href="#" class="menu--link" title="Item 3">
+          <i class="menu--icon fa fa-fw fa-cog"></i>
+          <span class="menu--label">Calificar Actividad</span>
+        </a>
+        </router-link>
+      </li>
+
+      <li class="menu--item">
+        <router-link to="/Consultas">
+        <a href="#" class="menu--link" title="Item 3">
+          <i class="menu--icon fa fa-fw fa-cog"></i>
+          <span class="menu--label">Consultas</span>
         </a>
         </router-link>
       </li>
@@ -352,7 +406,7 @@ Vertical Reponsive Menu
     padding-left: 16px;
   }
   /* line 245, sass/vertical-responsive-menu.scss */
-  .vertical_nav__minify .collapse_menu--icon {
+  /*.vertical_nav__minify .collapse_menu--icon {
     -webkit-transform: rotate(180deg);
   }
 
