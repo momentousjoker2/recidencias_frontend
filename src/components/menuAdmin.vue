@@ -9,14 +9,14 @@
         <li class="menu--item">
           <router-link to="/"></router-link>
           <a href="#" class="menu--link" title="Item 2">
-            <i class="menu--icon fa fa-fw fa-briefcase"></i>
+            <i class="menu--icon fa fa-fw fas fa-home"></i>
             <span class="menu--label">Inicio</span>
           </a>
         </li>
         <li class="menu--item">
           <router-link to="/">
             <a href="#" class="menu--link" title="Item 3">
-              <i class="menu--icon fa fa-fw fa-cog"></i>
+              <i class="menu--icon fa fa-fw fas fa-edit"></i>
               <span class="menu--label">Cambio de formato</span>
             </a>
           </router-link>
@@ -24,7 +24,7 @@
 
         <li class="menu--item menu--item__has_sub_menu">
           <label class="menu--link" title="Item 4">
-            <i class="menu--icon fa fa-fw fa-database"></i>
+            <i class="menu--icon fa fa-fw fas fa-address-book"></i>
             <span class="menu--label">Registro</span>
           </label>
 
@@ -58,7 +58,7 @@
         </li>
         <li class="menu--item menu--item__has_sub_menu">
           <label class="menu--link" title="Item 4">
-            <i class="menu--icon fa fa-fw fa-database"></i>
+            <i class="menu--icon fa fa-fw fas fa-folder"></i>
             <span class="menu--label">Proyectos</span>
           </label>
           <ul class="sub_menu">
@@ -69,14 +69,14 @@
             </li>
             <li class="sub_menu--item">
               <router-link to="/">
-                <a href="#" class="sub_menu--link">Inscripción de estudiante a proyecto</a>
+                <a href="#" class="sub_menu--link">Inscripción de Estudiantes a proyecto</a>
               </router-link>
             </li>
           </ul>
         </li>
         <li class="menu--item menu--item__has_sub_menu">
           <label class="menu--link" title="Item 5">
-            <i class="menu--icon fa fa-fw fa-database"></i>
+            <i class="menu--icon fa fa-fw fas  fa-user-graduate"></i>
             <span class="menu--label">Consultas</span>
           </label>
 
@@ -102,10 +102,9 @@
         </li>
         <li class="menu--item menu--item__has_sub_menu">
           <label class="menu--link" title="Item 6">
-            <i class="menu--icon fa fa-fw fa-database"></i>
+            <i class="menu--icon fa fa-fw fas  fas fa-file-alt"></i>
             <span class="menu--label">Reportes</span>
           </label>
-
           <ul class="sub_menu">
             <li class="sub_menu--item">
               <router-link to="/">
@@ -194,13 +193,14 @@ export default {
 
 
 <style>
-@import "../assets/font-awesome-4.7.0/css/font-awesome.css";
+@import "../assets/font-awesome/css/all.css";
+@import "../assets/font-awesome/css/all.css";
 @import "../assets/normalize-8.0.1/normalize.css";
 /*
 =========================
 Vertical Reponsive Menu
 =========================
-*/
+*/ 
 /* line 6, sass/import/mixins.scss */
 .vertical_nav,
 .collapse_menu .collapse_menu--icon {
@@ -352,7 +352,7 @@ Vertical Reponsive Menu
   display: block;
   padding-left: 50px;
   padding-right: 16px;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   color: #666;
   text-decoration: none;
 }
