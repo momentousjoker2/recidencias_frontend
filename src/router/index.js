@@ -1,47 +1,99 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import AprobarSolicitud from '../views/AprobarSolicitud.vue'
-import RegistroAlumnos from '../views/RegistroAlumnos.vue'
-import EnviarSolicitud from '../views/EnviarSolicitud.vue'
-import RegistroActividad from '../views/RegistroActividad.vue'
-import tipoProyecto from '../views/TipoProyecto.vue'
-import CalificarActividad from '../views/CalificarActividad.vue'
-import Consultas from '../views/Consultas.vue'
+//Adminstracion
+import indexAdmin from "../views/admin/index.vue"
+import cambioFormato from "../views/admin/cambioFormato.vue"
+import traspasarAlumnos from "../views/admin/tranpasarAlumnos.vue"
+import traspasarMaestros from "../views/admin/tranpasarMaestros.vue"
+import tranpasarDepartamentos from "../views/admin/tranpasarDepartamentos.vue"
+import traspasarCarrera from "../views/admin/tranpasarCarreras.vue"
+import tipoProyecto from "../views/admin/tipoProyecto.vue"
+
+
+
+
+//General - Proyectos
+import altaProyectos from "../views/general/proyecto/altaProyectos.vue"
+import inscripcionEstudiantesProyecto from "../views/general/proyecto/inscripcionEstudiantesProyecto.vue"
+
+//General - consultas
+import alumnosProyecto from "../views/general/consultas/alumnosProyecto.vue"
+import creditosComplementariosAlumno from "../views/general/consultas/creditosComplementariosAlumno.vue"
+import proyectosPeriodo from "../views/general/consultas/proyectosPeriodo.vue"
+
+//General - reportes
+import generarConstanciaLiberacion from "../views/general/reportes/generarConstanciaLiberacion.vue"
+import generarConstanciasLiberacion from "../views/general/reportes/generarConstanciasLiberacion.vue"
 
 const routes = [{
-        path: '/AprobarSolicitud',
-        name: 'AprobarSolicitud',
-        component: AprobarSolicitud,
+        path: '/indexAdmin',
+        name: 'indexAdmin',
+        component: indexAdmin
     },
     {
-        path: '/RegistroAlumnos',
-        name: 'RegistroAlumnos',
-        component: RegistroAlumnos,
+        path: '/cambioFormato',
+        name: 'cambioFormato',
+        component: cambioFormato
     },
     {
-        path: '/EnviarSolicitud',
-        name: 'EnviarSolicitud',
-        component: EnviarSolicitud,
+        path: '/traspasarAlumnos',
+        name: 'traspasarAlumnos',
+        component: traspasarAlumnos
     },
     {
-        path: '/RegistroActividad',
-        name: 'RegistroActividad',
-        component: RegistroActividad,
+        path: '/traspasarMaestros',
+        name: 'traspasarMaestros',
+        component: traspasarMaestros
+    },
+    {
+        path: '/tranpasarDepartamentos',
+        name: 'tranpasarDepartamentos',
+        component: tranpasarDepartamentos
+    },
+    {
+        path: '/traspasarCarrera',
+        name: 'traspasarCarrera',
+        component: traspasarCarrera
     },
     {
         path: '/tipoProyecto',
         name: 'tipoProyecto',
-        component: tipoProyecto,
+        component: tipoProyecto
     },
     {
-        path: '/CalificarActividad',
-        name: 'CalificarActividad',
-        component: CalificarActividad,
+        path: '/altaProyectos',
+        name: 'altaProyectos',
+        component: altaProyectos
     },
     {
-        path: '/Consultas',
-        name: 'Consultas',
-        component: Consultas,
+        path: '/inscripcionEstudiantesProyecto',
+        name: 'inscripcionEstudiantesProyecto',
+        component: inscripcionEstudiantesProyecto
     },
+    {
+        path: '/creditosComplementariosAlumno',
+        name: 'creditosComplementariosAlumno',
+        component: creditosComplementariosAlumno
+    },
+    {
+        path: '/proyectosPeriodo',
+        name: 'proyectosPeriodo',
+        component: proyectosPeriodo
+    },
+    {
+        path: '/alumnosProyecto',
+        name: 'alumnosProyecto',
+        component: alumnosProyecto
+    },
+    {
+        path: '/generarConstanciaLiberacion',
+        name: 'generarConstanciaLiberacion',
+        component: generarConstanciaLiberacion
+    },
+    {
+        path: '/generarConstanciasLiberacion',
+        name: 'generarConstanciasLiberacion',
+        component: generarConstanciasLiberacion
+    }
 ]
 
 const router = createRouter({

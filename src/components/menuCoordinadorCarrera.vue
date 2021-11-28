@@ -42,18 +42,18 @@
             <li class="sub_menu--item">
               <router-link to="/">
                 <a href="#" class="sub_menu--link"
-                  >Créditos Complementarios X Alumno</a
+                  >Créditos Complementarios por Alumno</a
                 >
               </router-link>
             </li>
             <li class="sub_menu--item">
               <router-link to="/">
-                <a href="#" class="sub_menu--link">Proyectos X Período</a>
+                <a href="#" class="sub_menu--link">Proyectos por Período</a>
               </router-link>
             </li>
             <li class="sub_menu--item">
               <router-link to="/">
-                <a href="#" class="sub_menu--link">Alumnos X Proyecto</a>
+                <a href="#" class="sub_menu--link">Alumnos por Proyecto</a>
               </router-link>
             </li>
           </ul>

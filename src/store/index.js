@@ -1,15 +1,30 @@
-import { createStore } from 'vuex'
+import Vuex from 'vuex';
 
-export default createStore({
+const store = new Vuex.Store({
     state: {
-        rol: "Cordinador"
+        user: {
+            username: "",
+            login: true,
+            rol: "",
+        }
     },
-    mutations: {},
+    mutations: {
+        setTypeRoles(state, rol) {
+            state.user.rol = rol;
+        },
+        setLogined(state) {
+            return state.user.login;
+        }
+    },
     actions: {},
     modules: {},
     getters: {
         typeRoles(state) {
-            return state.rol;
+            return state.user.rol;
+        },
+        isLogined(state) {
+            return state.user.login;
         }
     }
-})
+});
+export default store
