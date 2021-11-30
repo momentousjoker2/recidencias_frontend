@@ -4,17 +4,26 @@ const store = new Vuex.Store({
     state: {
         user: {
             username: "",
-            login: true,
             rol: "",
+        },
+        sessionDate: {
+            isLogin: true,
+            date: new Date(),
         }
     },
     mutations: {
         setTypeRoles(state, rol) {
             state.user.rol = rol;
         },
-        setLogined(state) {
-            return state.user.login;
-        }
+        setUserRol(state, rol, username) {
+            state.user.rol = rol;
+            state.user.username = username;
+        },
+        setLogin(state, isLogin, date) {
+            state.sessionDate.isLogin = isLogin;
+            state.sessionDate.date = date;
+        },
+
     },
     actions: {},
     modules: {},
@@ -22,8 +31,8 @@ const store = new Vuex.Store({
         typeRoles(state) {
             return state.user.rol;
         },
-        isLogined(state) {
-            return state.user.login;
+        getLogin(state) {
+            return state.sessionDate.isLogin;
         }
     }
 });

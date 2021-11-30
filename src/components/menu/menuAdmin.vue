@@ -7,38 +7,136 @@
   <nav class="vertical_nav" v-if="true">
     <ul id="js-menu" class="menu">
       <li class="menu--item">
-        <router-link to="/"></router-link>
-        <a href="#" class="menu--link" title="Item 2">
-          <i class="menu--icon fa fa-fw fas fa-home"></i>
-          <span class="menu--label">Inicio</span>
-        </a>
+        <router-link to="/indexAdmin">
+          <a href="#" class="menu--link" title="Item 2">
+            <i class="menu--icon fa fa-fw fas fa-home"></i>
+            <span class="menu--label">Inicio</span>
+          </a>
+        </router-link>
       </li>
       <li class="menu--item">
-        <router-link to="/"></router-link>
-        <a href="#" class="menu--link" title="Item 2">
-          <i class="menu--icon fa fa-fw fas fa-home"></i>
-          <span class="menu--label">Consultar Actividades Terminadas</span>
-        </a>
+        <router-link to="/SituacionEspecial">
+          <a href="#" class="menu--link" title="Item 3">
+            <i class="menu--icon fa-fw fas fa fa-star"></i>
+            <span class="menu--label">Situacion especial</span>
+          </a>
+        </router-link>
       </li>
       <li class="menu--item">
-        <router-link to="/"></router-link>
-        <a href="#" class="menu--link" title="Item 2">
-          <i class="menu--icon fa fa-fw fas fa-home"></i>
-          <span class="menu--label">Consultar Actividades Activas</span>
-        </a>
+        <router-link to="/cambioFormato">
+          <a href="#" class="menu--link" title="Item 3">
+            <i class="menu--icon fa fa-fw fas fa-edit"></i>
+            <span class="menu--label">Cambio de formato</span>
+          </a>
+        </router-link>
       </li>
-      <li class="menu--item">
-        <router-link to="/"></router-link>
-        <a href="#" class="menu--link" title="Item 2">
-          <i class="menu--icon fa fa-fw fas fa-home"></i>
-          <span class="menu--label">Solicitar Actividades</span>
-        </a>
+
+      <li class="menu--item menu--item__has_sub_menu">
+        <label class="menu--link" title="Item 4">
+          <i class="menu--icon fa fa-fw fas fa-address-book"></i>
+          <span class="menu--label">Registro</span>
+        </label>
+
+        <ul class="sub_menu">
+          <li class="sub_menu--item">
+            <router-link to="/traspasarAlumnos">
+              <a href="#" class="sub_menu--link">Tranpasar alumnos</a>
+            </router-link>
+          </li>
+          <li class="sub_menu--item">
+            <router-link to="/traspasarMaestros">
+              <a href="#" class="sub_menu--link">Tranpasar Maestros</a>
+            </router-link>
+          </li>
+          <li class="sub_menu--item">
+            <router-link to="/tranpasarDepartamentos">
+              <a href="#" class="sub_menu--link">Tranpasar Departamentos</a>
+            </router-link>
+          </li>
+          <li class="sub_menu--item">
+            <router-link to="/traspasarCarrera">
+              <a href="#" class="sub_menu--link">Tranpasar Carreras</a>
+            </router-link>
+          </li>
+          <li class="sub_menu--item">
+            <router-link to="/tipoProyecto">
+              <a href="#" class="sub_menu--link">Agregar tipo de proyecto</a>
+            </router-link>
+          </li>
+        </ul>
+      </li>
+      <li class="menu--item menu--item__has_sub_menu">
+        <label class="menu--link" title="Item 4">
+          <i class="menu--icon fa fa-fw fas fa-folder"></i>
+          <span class="menu--label">Proyectos</span>
+        </label>
+        <ul class="sub_menu">
+          <li class="sub_menu--item">
+            <router-link to="/altaProyectos">
+              <a href="#" class="sub_menu--link">Alta de Proyectos</a>
+            </router-link>
+          </li>
+          <li class="sub_menu--item">
+            <router-link to="/inscripcionEstudiantesProyecto">
+              <a href="#" class="sub_menu--link"
+                >Inscripción de Estudiantes a proyecto</a
+              >
+            </router-link>
+          </li>
+        </ul>
+      </li>
+      <li class="menu--item menu--item__has_sub_menu">
+        <label class="menu--link" title="Item 5">
+          <i class="menu--icon fa fa-fw fas fa-user-graduate"></i>
+          <span class="menu--label">Consultas</span>
+        </label>
+
+        <ul class="sub_menu">
+          <li class="sub_menu--item">
+            <router-link to="/creditosComplementariosAlumno">
+              <a href="#" class="sub_menu--link"
+                >Créditos Complementarios por Alumno</a
+              >
+            </router-link>
+          </li>
+          <li class="sub_menu--item">
+            <router-link to="/proyectosPeriodo">
+              <a href="#" class="sub_menu--link">Proyectos por Período</a>
+            </router-link>
+          </li>
+          <li class="sub_menu--item">
+            <router-link to="/alumnosProyecto">
+              <a href="#" class="sub_menu--link">Alumnos por Proyecto</a>
+            </router-link>
+          </li>
+        </ul>
+      </li>
+      <li class="menu--item menu--item__has_sub_menu">
+        <label class="menu--link" title="Item 6">
+          <i class="menu--icon fa fa-fw fas fas fa-file-alt"></i>
+          <span class="menu--label">Reportes</span>
+        </label>
+        <ul class="sub_menu">
+          <li class="sub_menu--item">
+            <router-link to="/generarConstanciaLiberacion">
+              <a href="#" class="sub_menu--link"
+                >Generar constancia de liberación</a
+              >
+            </router-link>
+          </li>
+          <li class="sub_menu--item">
+            <router-link to="/generarConstanciasLiberacion">
+              <a href="#" class="sub_menu--link"
+                >Generar constancias por liberación</a
+              >
+            </router-link>
+          </li>
+        </ul>
       </li>
     </ul>
-    <router-link to="/"></router-link>
     <button id="collapse_menu" class="collapse_menu">
       <i class="collapse_menu--icon fa fa-fw"></i>
-      <span class="collapse_menu--label">Recolher menu</span>
+      <span class="collapse_menu--label">Recojer menu</span>
     </button>
   </nav>
   <router-view />
@@ -106,9 +204,9 @@ export default {
 
 
 <style>
-@import "../assets/font-awesome/css/all.css";
-@import "../assets/font-awesome/css/all.css";
-@import "../assets/normalize-8.0.1/normalize.css";
+@import "../../assets/font-awesome/css/all.css";
+@import "../../assets/font-awesome/css/all.css";
+@import "../../assets/normalize-8.0.1/normalize.css";
 /*
 =========================
 Vertical Reponsive Menu
