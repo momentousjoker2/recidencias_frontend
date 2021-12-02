@@ -15,18 +15,10 @@
         </router-link>
       </li>
       <li class="menu--item">
-        <router-link to="/consultarActividadesT">
+        <router-link to="/consultarActividadesAT">
         <a href="#" class="menu--link" title="Item 2">
           <i class="menu--icon fa fa-fw fas fa-home"></i>
-          <span class="menu--label">Consultar Actividades Terminadas</span>
-        </a>
-        </router-link>
-      </li>
-      <li class="menu--item">
-        <router-link to="/consultarActividadesA">
-        <a href="#" class="menu--link" title="Item 2">
-          <i class="menu--icon fa fa-fw fas fa-home"></i>
-          <span class="menu--label">Consultar Actividades Activas</span>
+          <span class="menu--label">Consultar Actividades</span>
         </a>
         </router-link>
       </li>

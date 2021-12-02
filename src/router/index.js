@@ -29,8 +29,7 @@ import indexVentanilla from "@/views/jefeDepartamento/index.vue"
 
 //Alumnos
 import indexAlumno from "@/views/alumno/index.vue"
-import consultarActividadesT from "@/views/alumno/consultas/consultarActividadesT.vue"
-import consultarActividadesA from "@/views/alumno/consultas/consultarActividadesA.vue"
+import consultarActividadesAT from "@/views/alumno/consultas/consultarActividadesAT.vue"
 import solicitarActividad from "@/views/alumno/solicitud/solicitarActividad.vue"
 
 
@@ -124,14 +123,9 @@ const routes = [
 
     //Alumnos
     {
-        path: '/consultarActividadesT',
-        name: 'consultarActividadesT',
-        component: consultarActividadesT
-    },
-    {
-        path: '/consultarActividadesA',
-        name: 'consultarActividadesA',
-        component: consultarActividadesA
+        path: '/consultarActividadesAT',
+        name: 'consultarActividadesAT',
+        component: consultarActividadesAT
     },
     {
         path: '/solicitarActividad',

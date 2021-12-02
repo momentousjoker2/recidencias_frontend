@@ -108,22 +108,14 @@
                     <option value="14">otra</option>
                 </select>
             </div>
-            <div class="custom-control custom-control-inline">
-                <label>Descripcion:</label>
-                <input type="text" id="descripcion" name="descripcion">
-            </div>
         </form>
     </div>
 </div>
 <br/>
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title" align="center">Actividad</h4>
+        <h4 class="card-title" align="center">Mas detalles</h4>
         <form>
-            <div class="custom-control custom-control-inline">
-                <label>Nombre:</label>
-                <input type="text" id="NombreA" name="NombreA">
-            </div>
             <div class="custom-control custom-control-inline">
                 <label>Horario:</label>
                 <input type="time" id="horario" name="horario">
@@ -148,14 +140,7 @@
             </div>
             <div class="custom-control custom-control-inline">
                 <label>Creditos:</label>
-                <select name="Nombre" class="custom-select">
-                    <option selected>-------</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
+                <input type="text" id="credito" name="credito">
             </div>
         </form>
     </div>
@@ -163,19 +148,40 @@
 <br/>
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title" align="center">Formato de aprobacion</h4>
-        <form>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="formatoA">
-                <label class="custom-file-label" for="formatoA">Subir formato</label>
-            </div>
-        </form>
-    </div>
-</div>
-<br/>
-<div class="card">
-    <div class="card-body">
-        <center><button type="button" class="btn btn-primary btn-lg">Agregar Actividad</button></center>
+        <table class="table table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Semestre</th>
+                    <th scope="col">Carrera</th>
+                    <th scope="col">Creditos</th>
+                    <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Juanito</td>
+                <td>Ramirez Torrez</td>
+                <td>8</td>
+                <td>Sistemas</td>
+                <td>4</td>
+                <td><button type="button" class="btn btn-primary btn-sm">Mas Info.</button></td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Maria</td>
+                <td>Juarez Mendez</td>
+                <td>3</td>
+                <td>Informatica</td>
+                <td>2</td>
+                <td><button type="button" class="btn btn-primary btn-sm">Mas Info.</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <br/>
     </div>
 </div>
 <br/>
