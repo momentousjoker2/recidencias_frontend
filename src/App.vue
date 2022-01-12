@@ -1,17 +1,6 @@
 <template>
-  <h1>{{ $store.getters.typeRoles }}</h1>
-  <h1>{{ $store.getters.getLogined }}</h1>
 
   <div v-if="$store.getters.getLogin">
-    <select v-model="selected" v-on:change="changeItem">
-      <option disabled value="">Seleccione un elemento</option>
-      <option>Administrador</option>
-      <option>JefeDepartamento</option>
-      <option>Cordinador</option>
-      <option>Ventanilla</option>
-      <option>Estudiante</option>
-    </select>
-    <span>Seleccionado: {{ selected }}</span>
 
     <menuAdmin v-if="$store.getters.typeRoles === 'Administrador'" />
     <menuJefeDepartamento v-else-if="$store.getters.typeRoles === 'JefeDepartamento'" />

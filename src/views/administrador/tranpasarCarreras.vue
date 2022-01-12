@@ -24,11 +24,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row"></th>
-                                <td>1</td>
-                                <td>INGENIERIA INFORMATICA</td>
-                                <td>INGINFO</td>
+                        <tr v-for="carreras in info" :key="carreras.IdCar">
+                                <th scope="col"></th>
+                                <td>{{carreras.IdCar}} </td>
+                                <td>{{carreras.NombreCar}} </td>
+                                <td>{{carreras.Siglas}} </td>
                         </tr>
                     </tbody>
                 </table>
@@ -38,7 +38,22 @@
 </template>
 
 <script>
+
+
+const axios = require('axios').default;
+
 export default {
+    el: 'app',
+    data () {
+        return {
+            info: null
+        }
+    },
+    created () {
+        axios
+        .get('https://node-websistemas.000webhostapp.com/catalagos/carreras')
+        .then(response => (this.info = response.data))
+    }
 
 }
 </script>

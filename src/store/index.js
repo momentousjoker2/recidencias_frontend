@@ -4,10 +4,10 @@ const store = new Vuex.Store({
     state: {
         user: {
             username: "",
-            rol: "",
+            rol: "Estudiante",
         },
         sessionDate: {
-            isLogin: true,
+            isLogin: false,
             date: new Date(),
         }
     },

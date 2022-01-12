@@ -24,6 +24,7 @@ export default {
     store: store,
     methods: {
         login() {
+            
             store.commit("setLogin",true, new Date() );
             store.commit("setUserRol",this.email, this.password);
         }
