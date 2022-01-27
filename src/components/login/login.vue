@@ -2,8 +2,8 @@
 <div class="login">
     <h1 class="title">Login in the page</h1>
     <form action class="form" @submit.prevent="login">
-        <label class="form-label" for="#email">Email:</label>
-        <input v-model="email" class="form-input" type="text" id="email" required placeholder="Email" >
+        <label class="form-label" for="#username">Usuario:</label>
+        <input v-model="username" class="form-input" type="text" id="username" required placeholder="Usuario" >
         <label class="form-label" for="#password">Password:</label>
         <input v-model="password" class="form-input" type="password" id="password" placeholder="Password" >
     <p v-if="error" class="error">Has introducido mal el email o la contraseña.</p>
@@ -14,21 +14,109 @@
 
 <script>
 import store from "@/store";
+import axios from "axios";
+
 
 export default {
     data: () => ({
-        email: "",
+        username: "",
         password: "",
         error: false
     }),
     store: store,
     methods: {
         login() {
-            
-            store.commit("setLogin",true, new Date() );
-            store.commit("setUserRol",this.email, this.password);
+        let auth = store.getters.getApiKey; //auth key
+        let url = store.getters.getApiName; //api url
+
+     /*    let data =  
+        {
+            email: this.username, //varEmail is a variable which holds the email
+            password: this.password, //varPassword is
         }
+ */
+        let headers =
+        {
+            Authorization: auth
+        }
+        var data = new FormData();
+            data.append('usuario', '17290713');
+            data.append('password', '123');
+
+        var config = {
+            headers: { 
+                    'Authorization': auth
+            },
+            data : data
+        };
+
+        axios.get(url,config).then(function (res) {
+                console.log("respuesta opcion 1" + res);
+        }).catch((err) => {
+                console.log("Error opcion 1" + err);
+        });
+
+        axios.get(config).then(function (res) {
+                console.log("respuesta opcion 2" + res);
+        }).catch((err) => {
+                console.log("Error opcion 2" + err);
+        });
+
+        axios.get(url,data,headers).then(function (res) {
+                console.log("respuesta opcion 3" + res);
+        }).catch((err) => {
+                console.log("Error opcion 3" + err);
+        });
+
+        /* 
+        axios(
+        {
+            method: 'GET',
+            url: url,        
+        },{         
+            data : {
+            }, headers: {
+                "Authorization":"3aebc6817c43ee5433194c9c2138cd72",
+            }
+        }).then(function (res) {
+            console.log(res)
+        }).catch((err) => {
+                console.log( err);
+        });
+ */
+       
+
+            /* 
+                 axios.get('/Catalagos/carreras') 
+            .then((res) => {
+                console.log("RESPONSE RECEIVED: ", res.data);
+            })
+            .catch((err) => {
+                console.log("AXIOS ERROR: ", err);
+            })
+        axios.get('http://proyectocreditosfrontend.000webhostapp.com/Catalagos/carreras', {
+            headers: {
+            }
+            })
+            .then((res) => {
+                console.log(res.data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+
+        axios.get("",config)
+            .then((res) => {
+                console.log("RESPONSE RECEIVED: ", res.data);
+            })
+            .catch((err) => {
+                console.log("AXIOS ERROR: ", err);
+            })
+               */
+        }
+     
     }
+    
 };
 </script>
 

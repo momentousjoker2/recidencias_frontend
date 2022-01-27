@@ -1,5 +1,4 @@
 <template>
-
   <div v-if="$store.getters.getLogin">
 
     <menuAdmin v-if="$store.getters.typeRoles === 'Administrador'" />

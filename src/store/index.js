@@ -3,12 +3,17 @@ import Vuex from 'vuex';
 const store = new Vuex.Store({
     state: {
         user: {
+            id: "",
             username: "",
-            rol: "Estudiante",
+            rol: "",
         },
         sessionDate: {
             isLogin: false,
             date: new Date(),
+        },
+        api: {
+            name: "http://proyectocreditosfrontend.000webhostapp.com/",
+            key: "3aebc6817c43ee5433194c9c2138cd72",
         }
     },
     mutations: {
@@ -28,6 +33,12 @@ const store = new Vuex.Store({
     actions: {},
     modules: {},
     getters: {
+        getApiName(state) {
+            return state.api.name;
+        },
+        getApiKey(state) {
+            return state.api.key;
+        },
         typeRoles(state) {
             return state.user.rol;
         },
