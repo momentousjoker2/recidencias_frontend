@@ -17,7 +17,6 @@
                 <table class="table table-sm">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col"></th>
                             <th scope="col">No. control</th>
                             <th scope="col">Nombre Alumno</th>
                             <th scope="col">Apellido Paterno</th>
@@ -27,14 +26,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                                <td>17290712</td>
-                                <td>Jorge Manuel</td>
-                                <td>Perez</td>
-                                <td>Molina</td>
-                                <td>3</td>
-                                <td>Sistemas</td>
+                        <tr v-for="Estudiantes in info" :key="Estudiantes.Numero_Control">
+                            <td>{{Estudiantes.Numero_Control}} </td>
+                            <td>{{Estudiantes.Nombre}}</td>
+                            <td>{{Estudiantes.Apellido_Paterno}}  </td>
+                            <td>{{Estudiantes.Apellido_Materno}}  </td>
+                            <td>{{Estudiantes.Semestre}}  </td>
+                            <td>{{Estudiantes.Id_Carrera}}  </td>
                         </tr>
                     </tbody>
                 </table>
@@ -44,7 +42,28 @@
 </template>
 
 <script>
+
+import axios from "axios";
+import store from "@/store";
+
 export default {
+    el: 'app',
+    data () {
+        return {
+            info: null
+        }
+    },
+    created () {
+                let url = store.getters.getApiName + "Catalagos/estudiantes"; //api url
+                axios.get(url)
+                    .then((res) => {
+                        console.log("RESPONSE RECEIVED: ", res.data.data);
+                        this.info = res.data.data;
+                        console.log("RESPONSE RECEIVED: ", this.info);
+                    }) .catch((err) => {
+                console.log("AXIOS ERROR: ", err);
+            });       // console.log(this.info);
+    }
 
 }
 </script>

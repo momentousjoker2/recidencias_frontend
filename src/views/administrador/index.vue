@@ -1,10 +1,16 @@
 <template>
-    <h1>Index admin</h1>
+    <h1>Hola Administrador</h1> 
+    <h1>{{username}}</h1> 
 </template>
 
 <script>
-export default {
+import store from "@/store";
 
+export default {
+ data: () => ({
+        username: store.getters.getName
+    }),
+    store: store,
 }
 </script>
 

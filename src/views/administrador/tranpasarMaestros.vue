@@ -17,18 +17,18 @@
                 <table class="table table-sm">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col"></th>
                             <th scope="col">Clave Docente</th>
                             <th scope="col">Nombre del Docente</th>
                             <th scope="col">Departamento</th>
+                            <th scope="col">Puesto</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row"></th>
-                                <td>1</td>
-                                <td>Juan Antonio Perez Ramirez</td>
-                                <td>1</td>
+                        <tr v-for="Empleados in info" :key="Empleados.Id_Personal">
+                            <td>{{Empleados.Id_Personal}} </td>
+                            <td>{{Empleados.Nombre}}</td>
+                            <td>{{Empleados.Id_Departamento}}  </td>
+                            <td>{{Empleados.Puesto}}  </td>
                         </tr>
                     </tbody>
                 </table>
@@ -38,7 +38,28 @@
 </template>
 
 <script>
+
+import axios from "axios";
+import store from "@/store";
+
 export default {
+    el: 'app',
+    data () {
+        return {
+            info: null
+        }
+    },
+    created () {
+                let url = store.getters.getApiName + "Catalagos/empleados"; //api url
+                axios.get(url)
+                    .then((res) => {
+                        console.log("RESPONSE RECEIVED: ", res.data.data);
+                        this.info = res.data.data;
+                        console.log("RESPONSE RECEIVED: ", this.info);
+                    }) .catch((err) => {
+                console.log("AXIOS ERROR: ", err);
+            });       // console.log(this.info);
+    }
 
 }
 </script>

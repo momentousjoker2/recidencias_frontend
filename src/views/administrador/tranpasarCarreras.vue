@@ -26,9 +26,9 @@
                     <tbody>
                         <tr v-for="carreras in info" :key="carreras.IdCar">
                                 <th scope="col"></th>
-                                <td>{{carreras.IdCar}} </td>
-                                <td>{{carreras.NombreCar}} </td>
-                                <td>{{carreras.Siglas}} </td>
+                                <td>{{carreras.id_Carrera}} </td>
+                                <td>{{carreras.Nombre_Carrera}} </td>
+                                <td>{{carreras.Siglas_Carrera}} </td>
                         </tr>
                     </tbody>
                 </table>
@@ -39,8 +39,8 @@
 
 <script>
 
-
-const axios = require('axios').default;
+import axios from "axios";
+import store from "@/store";
 
 export default {
     el: 'app',
@@ -50,9 +50,15 @@ export default {
         }
     },
     created () {
-        axios
-        .get('https://node-websistemas.000webhostapp.com/catalagos/carreras')
-        .then(response => (this.info = response.data))
+                let url = store.getters.getApiName + "Catalagos/carreras"; //api url
+                axios.get(url)
+                    .then((res) => {
+                        console.log("RESPONSE RECEIVED: ", res.data.data);
+                        this.info = res.data.data;
+                        console.log("RESPONSE RECEIVED: ", this.info);
+                    }) .catch((err) => {
+                console.log("AXIOS ERROR: ", err);
+            });       // console.log(this.info);
     }
 
 }
