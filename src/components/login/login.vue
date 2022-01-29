@@ -6,7 +6,8 @@
         <input v-model="username" class="form-input" type="text" id="username" required placeholder="Usuario" >
         <label class="form-label" for="#password">Password:</label>
         <input v-model="password" class="form-input" type="password" id="password" placeholder="Password" >
-    <p v-if="error" class="error">Has introducido mal el email o la contraseña.</p>
+        <div><br></div>
+    <p v-if="error" class="alert alert-danger" role="alert">Has introducido mal el usuario o la contraseña.</p>
     <input class="form-submit" type="submit" value="Login">
     </form>
 </div>
@@ -26,95 +27,36 @@ export default {
     store: store,
     methods: {
         login() {
-        let auth = store.getters.getApiKey; //auth key
-        let url = store.getters.getApiName; //api url
+        let url = store.getters.getApiName + "login";
 
-     /*    let data =  
-        {
-            email: this.username, //varEmail is a variable which holds the email
-            password: this.password, //varPassword is
-        }
- */
-        let headers =
-        {
-            Authorization: auth
-        }
         var data = new FormData();
-            data.append('usuario', '17290713');
-            data.append('password', '123');
 
-        var config = {
-            headers: { 
-                    'Authorization': auth
-            },
-            data : data
-        };
+            data.append('usuario', this.username);
+            data.append('password', this.password);
 
-        axios.get(url,config).then(function (res) {
-                console.log("respuesta opcion 1" + res);
-        }).catch((err) => {
-                console.log("Error opcion 1" + err);
-        });
-
-        axios.get(config).then(function (res) {
-                console.log("respuesta opcion 2" + res);
-        }).catch((err) => {
-                console.log("Error opcion 2" + err);
-        });
-
-        axios.get(url,data,headers).then(function (res) {
-                console.log("respuesta opcion 3" + res);
-        }).catch((err) => {
-                console.log("Error opcion 3" + err);
-        });
-
-        /* 
-        axios(
-        {
-            method: 'GET',
-            url: url,        
-        },{         
-            data : {
-            }, headers: {
-                "Authorization":"3aebc6817c43ee5433194c9c2138cd72",
-            }
-        }).then(function (res) {
-            console.log(res)
-        }).catch((err) => {
-                console.log( err);
-        });
- */
-       
-
-            /* 
-                 axios.get('/Catalagos/carreras') 
+        axios.post(url, data)
             .then((res) => {
                 console.log("RESPONSE RECEIVED: ", res.data);
+                if(res.data.Error){
+                    this.error=true;
+                }else{
+                    this.error=false;
+                    if(res.data.TypeUser=="Estudiante"){
+                        var nombre=res.data.Estudiante.Nombre + " " + res.data.Estudiante.Apellido_Paterno + " " + res.data.Estudiante.Apellido_Materno;
+                        store.commit("setUserID",res.data.Estudiante.Numero_Control);
+                        store.commit("setUserName",nombre);
+                    }else{
+                        var nombre = res.data.Empleado.Nombre;
+                        store.commit("setUserID",res.data.Empleado.Id_Personal);
+                        store.commit("setUserName",nombre);
+                    }
+                    store.commit("setTypeRoles",res.data.TypeUser);
+                }
             })
             .catch((err) => {
                 console.log("AXIOS ERROR: ", err);
             })
-        axios.get('http://proyectocreditosfrontend.000webhostapp.com/Catalagos/carreras', {
-            headers: {
-            }
-            })
-            .then((res) => {
-                console.log(res.data)
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-
-        axios.get("",config)
-            .then((res) => {
-                console.log("RESPONSE RECEIVED: ", res.data);
-            })
-            .catch((err) => {
-                console.log("AXIOS ERROR: ", err);
-            })
-               */
         }
-     
     }
     
 };

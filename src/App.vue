@@ -7,6 +7,15 @@
     <menuVentanillaServiciosEscolares v-else-if="$store.getters.typeRoles === 'Ventanilla'" />
     <menuEstudiantes v-else-if="$store.getters.typeRoles === 'Estudiante'" />
   </div>
+ <select v-model="selected" v-on:change="changeItem">
+      <option disabled value="">Seleccione un elemento</option>
+      <option>Administrador</option>
+      <option>JefeDepartamento</option>
+      <option>Cordinador</option>
+      <option>Ventanilla</option>
+      <option>Estudiante</option>
+    </select>
+    <span>Seleccionado: {{ selected }}</span>
 
   <login v-if="!$store.getters.getLogin" />
 </template>
@@ -23,6 +32,7 @@ import store from "@/store";
 
 export default {
   name: "init",
+
   data: function () {
     return {
       selected: "",
@@ -37,7 +47,7 @@ export default {
     menuEstudiantes,
     login,
   },
-  methods: {
+methods: {
     changeItem: function (event) {
       console.log(event.target.value);
       store.commit("setTypeRoles", event.target.value);

@@ -12,18 +12,23 @@ const store = new Vuex.Store({
             date: new Date(),
         },
         api: {
+            //name: "http://localhost:8080/",
             name: "http://proyectocreditosfrontend.000webhostapp.com/",
             key: "3aebc6817c43ee5433194c9c2138cd72",
         }
     },
     mutations: {
-        setTypeRoles(state, rol) {
-            state.user.rol = rol;
+        setUserID(state, id) {
+            state.user.id = id;
         },
-        setUserRol(state, rol, username) {
-            state.user.rol = rol;
+        setUserName(state, username) {
             state.user.username = username;
         },
+        setTypeRoles(state, rol) {
+            state.user.rol = rol;
+            state.sessionDate.isLogin = true;
+        },
+
         setLogin(state, isLogin, date) {
             state.sessionDate.isLogin = isLogin;
             state.sessionDate.date = date;
@@ -44,6 +49,9 @@ const store = new Vuex.Store({
         },
         getLogin(state) {
             return state.sessionDate.isLogin;
+        },
+        getName(state) {
+            return state.user.username;
         }
     }
 });
