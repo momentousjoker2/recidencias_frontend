@@ -46,7 +46,6 @@ export default {
   },
   created () {
     if(router.currentRoute.value.path === "/"){
-      console.log(store.getters.getLogged)
       if(store.getters.getLogged)
           {
             switch (store.getters.getRol) {
@@ -67,7 +66,6 @@ export default {
                 break;
               default:
                 router.push("menu")
-
                 break;
             }
           }
@@ -92,7 +90,6 @@ export default {
   },
   methods:{
     changeItem: function (event) {
-      console.log(event.target.value);
       store.commit("setUserRol",event.target.value);
     }
   }
