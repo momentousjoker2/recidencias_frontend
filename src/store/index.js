@@ -2,38 +2,40 @@ import Vuex from 'vuex';
 
 const store = new Vuex.Store({
     state: {
-        user: {
-            id: "",
-            username: "",
-            rol: "",
-        },
-        sessionDate: {
-            isLogin: false,
-            date: new Date(),
-        },
         api: {
-            //name: "http://localhost:8080/",
-            name: "http://proyectocreditosfrontend.000webhostapp.com/",
+            //name: "http://localhost:8081/",
+            name: "https://proyectocreditosfrontend.000webhostapp.com/",
             key: "3aebc6817c43ee5433194c9c2138cd72",
-        }
+        },
+        login: {
+            islogged: sessionStorage.getItem("islogged"),
+            User_id: sessionStorage.getItem("User_id"),
+            User_username: sessionStorage.getItem("User_username"),
+            User_rol: sessionStorage.getItem("User_rol"),
+            InitialState: sessionStorage.getItem("InitialState"),
+        },
     },
     mutations: {
-        setUserID(state, id) {
-            state.user.id = id;
+        setLogged(state, islogged) {
+            state.login.islogged = islogged;
+            sessionStorage.setItem("islogged", islogged);
         },
-        setUserName(state, username) {
-            state.user.username = username;
+        setIdUsername(state, User_id) {
+            state.login.User_id = User_id;
+            sessionStorage.setItem("User_id", User_id);
         },
-        setTypeRoles(state, rol) {
-            state.user.rol = rol;
-            state.sessionDate.isLogin = true;
+        setUsername(state, User_username) {
+            state.login.User_username = User_username;
+            sessionStorage.setItem("User_username", User_username)
         },
-
-        setLogin(state, isLogin, date) {
-            state.sessionDate.isLogin = isLogin;
-            state.sessionDate.date = date;
+        setUserRol(state, User_rol) {
+            state.login.User_rol = User_rol;
+            sessionStorage.setItem("User_rol", User_rol)
         },
-
+        setInitialState(state, InitialState) {
+            state.login.InitialState = InitialState;
+            sessionStorage.setItem("InitialState", InitialState)
+        },
     },
     actions: {},
     modules: {},
@@ -44,14 +46,20 @@ const store = new Vuex.Store({
         getApiKey(state) {
             return state.api.key;
         },
-        typeRoles(state) {
-            return state.user.rol;
+        getInitialState(state) {
+            return state.login.InitialState;
         },
-        getLogin(state) {
-            return state.sessionDate.isLogin;
+        getLogged(state) {
+            return state.login.islogged;
         },
-        getName(state) {
-            return state.user.username;
+        getIdUsername(state) {
+            return state.login.User_id;
+        },
+        getUserName(state) {
+            return state.login.User_username;
+        },
+        getRol(state) {
+            return state.login.User_rol;
         }
     }
 });

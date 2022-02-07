@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import router from "@/router";
 import store from "@/store";
 import axios from "axios";
 
@@ -24,13 +25,15 @@ export default {
         password: "",
         error: false
     }),
+    created () {
+        router.push("login")
+    },
     store: store,
-    methods: {
+        methods: {
         login() {
         let url = store.getters.getApiName + "login";
 
         var data = new FormData();
-
             data.append('usuario', this.username);
             data.append('password', this.password);
 
@@ -43,14 +46,18 @@ export default {
                     this.error=false;
                     if(res.data.TypeUser=="Estudiante"){
                         var nombre=res.data.Estudiante.Nombre + " " + res.data.Estudiante.Apellido_Paterno + " " + res.data.Estudiante.Apellido_Materno;
-                        store.commit("setUserID",res.data.Estudiante.Numero_Control);
-                        store.commit("setUserName",nombre);
+                        store.commit("setIdUsername",res.data.Estudiante.Numero_Control)
+                        store.commit("setUsername",nombre)
                     }else{
                         var nombre = res.data.Empleado.Nombre;
-                        store.commit("setUserID",res.data.Empleado.Id_Personal);
-                        store.commit("setUserName",nombre);
+                        store.commit("setIdUsername",res.data.Empleado.Id_Personal)
+                        store.commit("setUsername",nombre)
                     }
-                    store.commit("setTypeRoles",res.data.TypeUser);
+                    store.commit("setUserRol",res.data.TypeUser)
+                    store.commit("setLogged",true)
+
+                    location.reload();
+                    router.push("menu")
                 }
             })
             .catch((err) => {
