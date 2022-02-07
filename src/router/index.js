@@ -5,15 +5,17 @@ import {
 
 //Login
 import login from '@/components/login/login.vue'
+import menu from "@/components/menu/menu.vue"
 
 //Adminstracion 
 import indexAdmin from "@/views/administrador/index.vue"
 import cambioFormato from "@/views/administrador/cambioFormato.vue"
-import traspasarAlumnos from "@/views/administrador/tranpasarAlumnos.vue"
-import traspasarMaestros from "@/views/administrador/tranpasarMaestros.vue"
-import tranpasarDepartamentos from "@/views/administrador/tranpasarDepartamentos.vue"
-import traspasarCarrera from "@/views/administrador/tranpasarCarreras.vue"
+import Alumnos from "@/views/administrador/Alumnos.vue"
+import Maestros from "@/views/administrador/Maestros.vue"
+import Departamentos from "@/views/administrador/Departamentos.vue"
+import Carrera from "@/views/administrador/Carreras.vue"
 import tipoProyecto from "@/views/administrador/tipoProyecto.vue"
+import periodos from "@/views/administrador/Periodos.vue"
 import SituacionEspecial from "@/views/administrador/SituacionEspecial.vue"
 
 //Jefe de departamento
@@ -41,6 +43,7 @@ import inscripcionEstudiantesProyecto from "@/views/general/proyecto/inscripcion
 import alumnosProyecto from "@/views/general/consultas/alumnosProyecto.vue"
 import creditosComplementariosAlumno from "@/views/general/consultas/creditosComplementariosAlumno.vue"
 import proyectosPeriodo from "@/views/general/consultas/proyectosPeriodo.vue"
+import actividadesActivas from "@/views/general/consultas/proyectoActivos.vue"
 
 //General - reportes
 import generarConstanciaLiberacion from "@/views/general/reportes/generarConstanciaLiberacion.vue"
@@ -52,6 +55,11 @@ const routes = [
         path: "/login",
         name: "login",
         component: login
+    },
+    {
+        path: "/menu",
+        name: "menu",
+        component: menu
     },
     //Index
     {
@@ -87,29 +95,34 @@ const routes = [
         component: cambioFormato
     },
     {
-        path: '/traspasarAlumnos',
-        name: 'traspasarAlumnos',
-        component: traspasarAlumnos
+        path: '/Alumnos',
+        name: 'Alumnos',
+        component: Alumnos
     },
     {
-        path: '/traspasarMaestros',
-        name: 'traspasarMaestros',
-        component: traspasarMaestros
+        path: '/Maestros',
+        name: 'Maestros',
+        component: Maestros
     },
     {
-        path: '/tranpasarDepartamentos',
-        name: 'tranpasarDepartamentos',
-        component: tranpasarDepartamentos
+        path: '/Departamentos',
+        name: 'Departamentos',
+        component: Departamentos
     },
     {
-        path: '/traspasarCarrera',
-        name: 'traspasarCarrera',
-        component: traspasarCarrera
+        path: '/Carrera',
+        name: 'Carrera',
+        component: Carrera
     },
     {
         path: '/tipoProyecto',
         name: 'tipoProyecto',
         component: tipoProyecto
+    },
+    {
+        path: '/periodos',
+        name: 'periodos',
+        component: periodos
     },
     //Jefe de departamento
 
@@ -160,6 +173,11 @@ const routes = [
         path: '/alumnosProyecto',
         name: 'alumnosProyecto',
         component: alumnosProyecto
+    },
+    {
+        path: '/ActividadesActivas',
+        name: 'ActividadesActivas',
+        component: actividadesActivas
     },
 
     //General - reportes

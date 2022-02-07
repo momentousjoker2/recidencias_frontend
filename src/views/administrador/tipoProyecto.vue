@@ -10,6 +10,7 @@
                 <th scope="col">ID:</th>
                 <th scope="col">Nombre:</th>
                 <th scope="col">Descripcion:</th>
+                <th scope="col" v-if="login.user_role === 'Administrador'" > Modificar</th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +19,7 @@
                 <td>{{Tipo_Proyecto.Id_Tipo_Proyecto}} </td>
                 <td>{{Tipo_Proyecto.Nombre_Tipo_Proyecto}} </td>
                 <td>{{Tipo_Proyecto.Descripcion}} </td>
+                <td v-if="login.user_role === 'Administrador'" ><button v-on:click="Modificar(Tipo_Proyecto)" type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal" >Modificar</button></td>
             </tr>
         </tbody>
     </table>
@@ -27,11 +29,10 @@
     <div class="card">
         <div class="card-body">
             <h4 align="center">Registrar Tipo de Proyecto</h4>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Nuevo</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal"> Nuevo</button>
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -45,11 +46,11 @@
                 <form>
                     <div class="custom-control custom-control-inline">
                         <label>Nombre:</label>
-                        <input type="text" id="Nombre" name="Nombre" v-model="tipo_Proyecto">
+                        <input type="text" id="Nombre" name="Nombre"  class="form-control" v-model="data.nombre">
                     </div>
                     <div class="custom-control custom-control-inline">
                         <label>Descripcion:</label>
-                        <input type="text" id="descripcion" name="descripcion" v-model="descripcion">
+                        <input type="text" id="descripcion" name="descripcion"  class="form-control" v-model="data.descripcion">
                     </div>
                     <br/>
                     <br/>
@@ -57,7 +58,8 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="close">Close</button>
-            <button type="button" class="btn btn-primary"  v-on:click="add">Agregar</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="add" v-if="data.id==''">Agregar</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="update" v-else>Modificar</button>
         </div>
         </div>
     </div>
@@ -74,8 +76,14 @@ export default {
     data () {
         return {
             info: null,
-            tipo_Proyecto : "",
-            descripcion : ""
+            data:{
+                id:"",
+                nombre:"",
+                descripcion:"",
+            },
+            login:{
+                user_role:sessionStorage.getItem("User_rol"),
+            }
         }
     },
     created () {
@@ -86,8 +94,8 @@ export default {
                 let url = store.getters.getApiName + "Catalagos/tipo_Proyecto"; //api url
 
                 let data = new FormData();
-                    data.append("tipo_Proyecto", this.tipo_Proyecto);
-                    data.append("description", this.descripcion);
+                    data.append("tipo_Proyecto", this.data.nombre);
+                    data.append("description", this.data.descripcion);
 
                 axios.post(url,data)
                     .then((res) => {
@@ -97,14 +105,37 @@ export default {
                     });
         },
         close: function(event) {
-            this.tipo_Proyecto="";
-            this.descripcion="";
+            this.data.id="";
+            this.data.nombre="";
+            this.data.descripcion="";
+
         },
         carga: function(event) {
                 let url = store.getters.getApiName + "Catalagos/tipo_Proyecto"; //api url
                 axios.get(url)
                     .then((res) => {
                         this.info = res.data.data;
+                    });
+        },
+        Modificar: function (datos) {
+            this.data.id=datos.Id_Tipo_Proyecto;
+            this.data.nombre=datos.Nombre_Tipo_Proyecto;
+            this.data.descripcion=datos.Descripcion;
+           // console.log(this.data);
+        },
+        update:function(event){
+            let url = store.getters.getApiName + "Catalagos/tipo_Proyecto_update"; //api url
+            let data = new FormData();
+                    data.append("id", this.data.id);
+                    data.append("tipo_Proyecto", this.data.nombre);
+                    data.append("description", this.data.descripcion);
+                    
+            axios.post(url,data)
+                    .then((res) => {
+                        console.log(res.data);
+                        if(res.status==200) {
+                            this.carga();
+                        }
                     });
         }
     }

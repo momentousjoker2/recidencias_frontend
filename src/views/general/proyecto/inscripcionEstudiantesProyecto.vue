@@ -7,7 +7,7 @@
         <form>
             <div class="custom-control custom-control-inline">
                 <label>Nombre:</label>
-                <input type="text" id="Nombre" name="Nombre">
+                <input type="text" id="Nombre" name="Nombre" v-model="data.Nombre">
             </div>
             <div class="custom-control custom-control-inline">
                 <label>Periodo:</label>

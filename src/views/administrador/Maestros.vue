@@ -26,7 +26,7 @@
                     <tbody>
                         <tr v-for="Empleados in info" :key="Empleados.Id_Personal">
                             <td>{{Empleados.Id_Personal}} </td>
-                            <td>{{Empleados.Nombre}}</td>
+                            <td>{{Empleados.Nombre_Personal}}</td>
                             <td>{{Empleados.Id_Departamento}}  </td>
                             <td>{{Empleados.Puesto}}  </td>
                         </tr>

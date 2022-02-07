@@ -39,28 +39,33 @@
 
         <ul class="sub_menu">
           <li class="sub_menu--item">
-            <router-link to="/traspasarAlumnos">
-              <a href="#" class="sub_menu--link">Tranpasar alumnos</a>
+            <router-link to="/Alumnos">
+              <a href="#" class="sub_menu--link">alumnos</a>
             </router-link>
           </li>
           <li class="sub_menu--item">
-            <router-link to="/traspasarMaestros">
-              <a href="#" class="sub_menu--link">Tranpasar Maestros</a>
+            <router-link to="/Maestros">
+              <a href="#" class="sub_menu--link">Maestros</a>
             </router-link>
           </li>
           <li class="sub_menu--item">
-            <router-link to="/tranpasarDepartamentos">
-              <a href="#" class="sub_menu--link">Tranpasar Departamentos</a>
+            <router-link to="/Departamentos">
+              <a href="#" class="sub_menu--link">Departamentos</a>
             </router-link>
           </li>
           <li class="sub_menu--item">
-            <router-link to="/traspasarCarrera">
-              <a href="#" class="sub_menu--link">Tranpasar Carreras</a>
+            <router-link to="/Carrera">
+              <a href="#" class="sub_menu--link">Carreras</a>
             </router-link>
           </li>
           <li class="sub_menu--item">
             <router-link to="/tipoProyecto">
-              <a href="#" class="sub_menu--link">Agregar tipo de proyecto</a>
+              <a href="#" class="sub_menu--link">Tipo de proyecto</a>
+            </router-link>
+          </li>
+          <li class="sub_menu--item">
+            <router-link to="/periodos">
+              <a href="#" class="sub_menu--link">Periodos</a>
             </router-link>
           </li>
         </ul>
@@ -72,19 +77,24 @@
         </label>
         <ul class="sub_menu">
           <li class="sub_menu--item">
-            <router-link to="/altaProyectos">
-              <a href="#" class="sub_menu--link">Alta de Proyectos</a>
+            <router-link to="/catalagoProyecto">
+              <a href="#" class="sub_menu--link">Catalago de proyectos</a>
             </router-link>
           </li>
           <li class="sub_menu--item">
             <router-link to="/inscripcionEstudiantesProyecto">
+              <a href="#" class="sub_menu--link" >Inscripción de Estudiantes a proyecto</a >
+            </router-link>
+          </li>
+          <li class="sub_menu--item">
+            <router-link to="/ActividadesActivas">
               <a href="#" class="sub_menu--link"
-                >Inscripción de Estudiantes a proyecto</a
-              >
+                >Activades Activas</a>
             </router-link>
           </li>
         </ul>
       </li>
+
       <li class="menu--item menu--item__has_sub_menu">
         <label class="menu--link" title="Item 5">
           <i class="menu--icon fa fa-fw fas fa-user-graduate"></i>

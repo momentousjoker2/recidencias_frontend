@@ -22,7 +22,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="Departamento in info" :key="Departamento.Id_Personal">
+                        <tr v-for="Departamento in info" :key="Departamento.id_Departamento">
                             <td>{{Departamento.id_Departamento}} </td>
                             <td>{{Departamento.Nombre_Departamento}}</td>
                         </tr>

@@ -5,37 +5,29 @@
         <form>
             <div class="custom-control custom-control-inline">
                 <label>No.Control:</label>
-                <input type="text" id="noControl" name="noControl">
+                <input type="text" id="noControl" name="noControl" v-model="filtro.noControl">
             </div>
             <div class="custom-control custom-control-inline">
                 <label>Nombre:</label>
-                <input type="text" id="nombre" name="nombre">
+                <input type="text" id="nombre" name="nombre" v-model="filtro.nombre">
             </div>
             <div class="custom-control custom-control-inline">
                 <label>Apellido paterno:</label>
-                <input type="text" id="ApellidoP" name="ApellidoP">
+                <input type="text" id="ApellidoP" name="ApellidoP" v-model="filtro.ApellidoP">
             </div>
             <div class="custom-control custom-control-inline">
                 <label>Apellido Materno:</label>
-                <input type="text" id="ApellidoM" name="ApellidoM">
+                <input type="text" id="ApellidoM" name="ApellidoM" v-model="filtro.ApellidoM">
             </div>
             <br/>
             <br/>
             <div class="custom-control custom-control-inline">
                 <label>Semestre:</label>
-                <input type="text" id="semestre" name="semestre">
-            </div>
-            <div class="custom-control custom-control-inline">
-                <label>Estatus:</label>
-                <input type="text" id="estatus" name="estatus">
+                <input type="text" id="semestre" name="semestre" v-model="filtro.semestre">
             </div>
             <div class="custom-control custom-control-inline">
                 <label>Carrera:</label>
-                <input type="text" id="Carrera" name="Carrera">
-            </div>
-            <div class="custom-control custom-control-inline">
-                <label>Periodo:</label>
-                <input type="text" id="Periodo" name="Periodo">
+                <input type="text" id="Carrera" name="Carrera" v-model="filtro.carrera">
             </div>
         </form>
     </div>
@@ -133,7 +125,30 @@
 </template>
 
 <script>
+import axios from "axios";
+import store from "@/store";
 
+export default {
+    el: 'app',
+    data () {
+        return {
+            filtro:{
+                noControl:"",
+                Nombre:"",
+                ApellidoP : "",
+                ApellidoM : "",
+                Semestre : "",
+                Carrera : "",
+            }
+        }
+    },
+    created () {
+    },  
+    methods: {
+       
+    }
+
+}
 </script>
 
 <style>
