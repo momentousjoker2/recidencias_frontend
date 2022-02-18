@@ -50,15 +50,12 @@ export default {
         }
     },
     created () {
-                let url = store.getters.getApiName + "Catalagos/empleados"; //api url
+                let url = store.getters.getApiName + "Catalagos/empleados"; 
                 axios.get(url)
                     .then((res) => {
-                        console.log("RESPONSE RECEIVED: ", res.data.data);
                         this.info = res.data.data;
-                        console.log("RESPONSE RECEIVED: ", this.info);
                     }) .catch((err) => {
-                console.log("AXIOS ERROR: ", err);
-            });       // console.log(this.info);
+                    });     
     }
 
 }

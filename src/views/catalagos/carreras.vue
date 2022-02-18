@@ -1,11 +1,11 @@
 <template>
-    <h1 align="center">Transpatar Departamento</h1>
+    <h1 align="center"> traspasar carreras</h1>
     <br />
     <div class="card">
         <div class="card-body">
             <form>
                 <div class="custom-control custom-control-inline">
-                    <center><button type="button" class="btn btn-primary btn-sm">Traspasar Departamentos</button></center>
+                    <center><button type="button" class="btn btn-primary btn-sm">Traspasar Carreras</button></center>
                 </div>    
             </form>
         </div>
@@ -17,14 +17,18 @@
                 <table class="table table-sm">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Clave Departamento</th>
-                            <th scope="col">Nombre Departamento</th>
+                            <th scope="col"></th>
+                            <th scope="col">Clave Carrera</th>
+                            <th scope="col">Nombre Carrera</th>
+                            <th scope="col">Siglas</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="Departamento in info" :key="Departamento.id_Departamento">
-                            <td>{{Departamento.id_Departamento}} </td>
-                            <td>{{Departamento.Nombre_Departamento}}</td>
+                        <tr v-for="carreras in info" :key="carreras.IdCar">
+                                <th scope="col"></th>
+                                <td>{{carreras.id_Carrera}} </td>
+                                <td>{{carreras.Nombre_Carrera}} </td>
+                                <td>{{carreras.Siglas_Carrera}} </td>
                         </tr>
                     </tbody>
                 </table>
@@ -46,15 +50,12 @@ export default {
         }
     },
     created () {
-                let url = store.getters.getApiName + "Catalagos/departamentos"; //api url
+                let url = store.getters.getApiName + "Catalagos/carreras";
                 axios.get(url)
                     .then((res) => {
-                        console.log("RESPONSE RECEIVED: ", res.data.data);
                         this.info = res.data.data;
-                        console.log("RESPONSE RECEIVED: ", this.info);
                     }) .catch((err) => {
-                console.log("AXIOS ERROR: ", err);
-            });       // console.log(this.info);
+                    });    
     }
 
 }

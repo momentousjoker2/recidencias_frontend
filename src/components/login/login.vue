@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import router from "@/router";
 import store from "@/store";
 import axios from "axios";
+
 
 
 export default {
@@ -26,38 +26,34 @@ export default {
         error: false
     }),
     created () {
-        router.push("login")
     },
+
     store: store,
         methods: {
         login() {
         let url = store.getters.getApiName + "login";
 
-        var data = new FormData();
-            data.append('usuario', this.username);
-            data.append('password', this.password);
+        let params ={
+            params:{
+                        usuario: this.username,
+                        password: this.password
+                    }
+        }
 
-        axios.post(url, data)
+        axios.get(url,params)
             .then((res) => {
-                console.log("RESPONSE RECEIVED: ", res.data);
+                console.log("RESPONSE RECEIVED: ", res);
                 if(res.data.Error){
                     this.error=true;
                 }else{
                     this.error=false;
-                    if(res.data.TypeUser=="Estudiante"){
-                        var nombre=res.data.Estudiante.Nombre + " " + res.data.Estudiante.Apellido_Paterno + " " + res.data.Estudiante.Apellido_Materno;
-                        store.commit("setIdUsername",res.data.Estudiante.Numero_Control)
-                        store.commit("setUsername",nombre)
-                    }else{
-                        var nombre = res.data.Empleado.Nombre;
-                        store.commit("setIdUsername",res.data.Empleado.Id_Personal)
-                        store.commit("setUsername",nombre)
-                    }
-                    store.commit("setUserRol",res.data.TypeUser)
-                    store.commit("setLogged",true)
 
+                    store.commit("setIdUsername",res.data.username)
+                    store.commit("setUsername",res.data.nombre)        
+                    store.commit("setUserRol",res.data.rol)
+                    store.commit("setLogged",true)
+                    
                     location.reload();
-                    router.push("menu")
                 }
             })
             .catch((err) => {

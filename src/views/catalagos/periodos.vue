@@ -9,17 +9,18 @@
                 <th scope="col"></th>
                 <th scope="col">ID:</th>
                 <th scope="col">Nombre:</th>
-                <th scope="col">Descripcion:</th>
+                <th scope="col">Status:</th>
                 <th scope="col" v-if="login.user_role === 'Administrador'" > Modificar</th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="Tipo_Proyecto in info" :key="Tipo_Proyecto.IdTipoProyecto">
+            <tr v-for="Periodo in info" :key="Periodo.Id_Periodo">
+                
                 <th scope="col"></th>
-                <td>{{Tipo_Proyecto.Id_Tipo_Proyecto}} </td>
-                <td>{{Tipo_Proyecto.Nombre_Tipo_Proyecto}} </td>
-                <td>{{Tipo_Proyecto.Descripcion}} </td>
-                <td v-if="login.user_role === 'Administrador'" ><button v-on:click="Modificar(Tipo_Proyecto)" type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal" >Modificar</button></td>
+                <td>{{Periodo.Id_Periodo}} </td>
+                <td>{{Periodo.Nombre_Periodo}} </td>
+                <td>{{Periodo.status}} </td>
+                <td v-if="login.user_role === 'Administrador'" ><button v-on:click="update_local(Periodo)" type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal" >Modificar</button></td>
             </tr>
         </tbody>
     </table>
@@ -28,7 +29,7 @@
 <div>
     <div class="card">
         <div class="card-body">
-            <h4 align="center">Registrar Tipo de Proyecto</h4>
+            <h4 align="center">Registrar Periodo</h4>
             <button type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal"> Nuevo</button>
         </div>
     </div>
@@ -37,7 +38,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Nuevo tipo de proyecto</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Nuevo Periodo</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -48,11 +49,15 @@
                         <label>Nombre:</label>
                         <input type="text" id="Nombre" name="Nombre"  class="form-control" v-model="data.nombre">
                     </div>
-                    <div class="custom-control custom-control-inline">
-                        <label>Descripcion:</label>
-                        <input type="text" id="descripcion" name="descripcion"  class="form-control" v-model="data.descripcion">
-                    </div>
                     <br/>
+                    <br/>
+                    <div class="custom-control custom-control-inline">
+                        <label>Status:</label>
+                        <select name="Creditos"  v-model="data.status" v-bind:value="data.status" required> 
+                            <option value="Activo " >Activo</option>
+                            <option value="Inactivo">Inactivo</option>                            
+                        </select>
+                    </div>
                     <br/>
                 </form>
         </div>
@@ -64,9 +69,7 @@
         </div>
     </div>
 </div>
-
 </template>
-
 <script>
 import axios from "axios";
 import store from "@/store";
@@ -79,7 +82,7 @@ export default {
             data:{
                 id:"",
                 nombre:"",
-                descripcion:"",
+                status:"",
             },
             login:{
                 user_role:sessionStorage.getItem("User_rol"),
@@ -87,57 +90,55 @@ export default {
         }
     },
     created () {
-            this.carga();
+            this.load();
     },  
     methods: {
-        add: function(event) {
-                let url = store.getters.getApiName + "Catalagos/tipo_Proyecto"; //api url
-
-                let data = new FormData();
-                    data.append("tipo_Proyecto", this.data.nombre);
-                    data.append("description", this.data.descripcion);
-
-                axios.post(url,data)
-                    .then((res) => {
-                        if(res.status==200) {
-                            this.carga();
-                        }
-                    });
-        },
-        close: function(event) {
-            this.data.id="";
-            this.data.nombre="";
-            this.data.descripcion="";
-
-        },
-        carga: function(event) {
-                let url = store.getters.getApiName + "Catalagos/tipo_Proyecto"; //api url
+        load: function(event) {
+                let url = store.getters.getApiName + "Catalagos/periodo";
                 axios.get(url)
                     .then((res) => {
                         this.info = res.data.data;
                     });
         },
-        Modificar: function (datos) {
-            this.data.id=datos.Id_Tipo_Proyecto;
-            this.data.nombre=datos.Nombre_Tipo_Proyecto;
-            this.data.descripcion=datos.Descripcion;
-           // console.log(this.data);
+        add: function(event) {
+                let url = store.getters.getApiName + "Catalagos/periodo"; 
+
+                let data = new FormData();
+                    data.append("Nombre", this.data.nombre);
+                    data.append("Status", this.data.status);
+
+                axios.post(url,data)
+                    .then((res) => {
+                        if(res.status==200) {
+                            this.load();
+                        }
+                    });
         },
         update:function(event){
-            let url = store.getters.getApiName + "Catalagos/tipo_Proyecto_update"; //api url
+            let url = store.getters.getApiName + "Catalagos/periodo_update";
             let data = new FormData();
                     data.append("id", this.data.id);
-                    data.append("tipo_Proyecto", this.data.nombre);
-                    data.append("description", this.data.descripcion);
+                    data.append("Nombre", this.data.nombre);
+                    data.append("Status", this.data.status);
                     
             axios.post(url,data)
                     .then((res) => {
                         console.log(res.data);
                         if(res.status==200) {
-                            this.carga();
+                            this.load();
                         }
                     });
-        }
+        },
+        update_local: function (datos) {
+            this.data.id=datos.Id_Periodo;
+            this.data.nombre=datos.Nombre_Periodo;
+            this.data.status=datos.status;
+        },
+        close: function(event) {
+            this.data.id="";
+            this.data.nombre="";
+            this.data.status="";
+        },
     }
 
 }

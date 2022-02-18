@@ -7,7 +7,7 @@
   <nav class="vertical_nav" v-if="true">
     <ul id="js-menu" class="menu">
       <li class="menu--item">
-        <router-link to="/indexAlumno">
+        <router-link to="/index">
         <a href="#" class="menu--link" title="Item 2">
           <i class="menu--icon fa fa-fw fas fa-home"></i>
           <span class="menu--label">Inicio</span>
@@ -31,7 +31,6 @@
         </router-link>
       </li>
     </ul>
-    <router-link to="/"></router-link>
     <button id="collapse_menu" class="collapse_menu">
       <i class="collapse_menu--icon fa fa-fw"></i>
       <span class="collapse_menu--label">Recolher menu</span>

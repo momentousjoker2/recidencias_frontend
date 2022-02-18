@@ -3,8 +3,8 @@ import Vuex from 'vuex';
 const store = new Vuex.Store({
     state: {
         api: {
-            //name: "http://localhost:8081/",
-            name: "https://proyectocreditosfrontend.000webhostapp.com/",
+            name: "http://localhost:8080/",
+            //name: "https://proyectocreditosfrontend.000webhostapp.com/",
             key: "3aebc6817c43ee5433194c9c2138cd72",
         },
         login: {

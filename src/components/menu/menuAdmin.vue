@@ -7,7 +7,7 @@
   <nav class="vertical_nav" v-if="true">
     <ul id="js-menu" class="menu">
       <li class="menu--item">
-        <router-link to="/indexAdmin">
+        <router-link to="/index">
           <a href="#" class="menu--link" title="Item 2">
             <i class="menu--icon fa fa-fw fas fa-home"></i>
             <span class="menu--label">Inicio</span>
@@ -39,27 +39,27 @@
 
         <ul class="sub_menu">
           <li class="sub_menu--item">
-            <router-link to="/Alumnos">
+            <router-link to="/alumnos">
               <a href="#" class="sub_menu--link">alumnos</a>
             </router-link>
           </li>
           <li class="sub_menu--item">
-            <router-link to="/Maestros">
+            <router-link to="/maestros">
               <a href="#" class="sub_menu--link">Maestros</a>
             </router-link>
           </li>
           <li class="sub_menu--item">
-            <router-link to="/Departamentos">
+            <router-link to="/departamento">
               <a href="#" class="sub_menu--link">Departamentos</a>
             </router-link>
           </li>
           <li class="sub_menu--item">
-            <router-link to="/Carrera">
+            <router-link to="/carreras">
               <a href="#" class="sub_menu--link">Carreras</a>
             </router-link>
           </li>
           <li class="sub_menu--item">
-            <router-link to="/tipoProyecto">
+            <router-link to="/tipoProyectos">
               <a href="#" class="sub_menu--link">Tipo de proyecto</a>
             </router-link>
           </li>

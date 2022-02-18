@@ -1,11 +1,12 @@
 <template>
   <div v-if="$store.getters.getLogged === 'true'">
-    <menuAdmin v-if="$store.getters.getRol === 'Administrador'"  />
+    <menuAdministrador v-if="$store.getters.getRol === 'Administrador'"  />
     <menuJefeDepartamento v-else-if="$store.getters.getRol === 'JefeDepartamento'" />
     <menuCoordinadorCarrera v-else-if="$store.getters.getRol === 'Cordinador'" />
     <menuVentanillaServiciosEscolares v-else-if="$store.getters.getRol === 'Ventanilla'"  />
     <menuEstudiantes v-else-if="$store.getters.getRol === 'Estudiante'"  />
   </div>
+  
   <login v-if="$store.getters.getLogged==='false'" />
   
   <div v-if="$store.getters.getLogged === 'true'">
@@ -25,12 +26,13 @@
 import store from "@/store";
 import router from "@/router";
 
-// @ es un alias a /src
-import menuAdmin from "@/components/menu/menuAdmin.vue";
+//Menus para categorias
+import menuAdministrador from "@/components/menu/menuAdmin.vue";
 import menuJefeDepartamento from "@/components/menu/menuJefeDepartamento.vue";
 import menuCoordinadorCarrera from "@/components/menu/menuCoordinadorCarrera.vue";
 import menuVentanillaServiciosEscolares from "@/components/menu/menuVentanillaServiciosEscolares.vue";
 import menuEstudiantes from "@/components/menu/menuEstudiantes.vue";
+
 import login from "@/components/login/login.vue";
 
 export default {
@@ -45,48 +47,48 @@ export default {
     };
   },
   created () {
-    if(router.currentRoute.value.path === "/"){
-      if(store.getters.getLogged)
-          {
-            switch (store.getters.getRol) {
-              case 'Administrador':
-                router.push("indexAdmin")
-                break;
-              case 'JefeDepartamento':
-                router.push("indexJefeDep")
-                break;
-              case 'Cordinador':
-                router.push("indexCoordinadores")
-                break;
-              case 'Ventanilla':
-                router.push("indexVentanilla")
-                break;
-              case 'Estudiante':
-                router.push("indexAlumno")
-                break;
-              default:
-                router.push("menu")
-                break;
-            }
-          }
-        else
-        { 
-          router.push("login")
-            if(!store.getters.getInitialState){
-                location.reload();
-                store.commit("setInitialState",true)
-              }
-          }
-    }
+    // if(router.currentRoute.value.path === "/"){
+    //   // if(store.getters.getLogged)
+    //   //     {
+    //   //       switch (store.getters.getRol) {
+    //   //         case 'Administrador':
+    //   //           router.push("indexAdmin")
+    //   //           break;
+    //   //         case 'JefeDepartamento':
+    //   //           router.push("indexJefeDep")
+    //   //           break;
+    //   //         case 'Cordinador':
+    //   //           router.push("indexCoordinadores")
+    //   //           break;
+    //   //         case 'Ventanilla':
+    //   //           router.push("indexVentanilla")
+    //   //           break;
+    //   //         case 'Estudiante':
+    //   //           router.push("indexAlumno")
+    //   //           break;
+    //   //         default:
+    //   //           router.push("menu")
+    //   //           break;
+    //   //       }
+    //   //     }
+    //   //   else
+    //   //   { 
+    //   //     router.push("login")
+    //   //       if(!store.getters.getInitialState){
+    //   //           location.reload();
+    //   //           store.commit("setInitialState",true)
+    //   //         }
+    //   //     }
+    // }
   },
   store: store,
   components: {
-    menuAdmin,
+    login,
+    menuAdministrador,
     menuJefeDepartamento,
     menuCoordinadorCarrera,
     menuVentanillaServiciosEscolares,
     menuEstudiantes,
-    login,
   },
   methods:{
     changeItem: function (event) {

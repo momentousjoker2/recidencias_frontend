@@ -7,7 +7,7 @@
   <nav class="vertical_nav" v-if="true">
     <ul id="js-menu" class="menu">
       <li class="menu--item">
-        <router-link to="/indexJefeDep">
+        <router-link to="/index">
           <a href="#" class="menu--link" title="Item 2">
             <i class="menu--icon fa fa-fw fas fa-home"></i>
             <span class="menu--label">Inicio</span>
