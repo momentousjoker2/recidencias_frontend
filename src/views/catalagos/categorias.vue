@@ -3,7 +3,7 @@
 <div>
     <div class="card">
         <div class="card-body">
-            <h4 align="center">Registrar Tipo de Proyecto</h4>
+            <h4 align="center">Registrar categoria de proyecto</h4>
             <button type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal"> Nuevo</button>
         </div>
     </div>
@@ -23,12 +23,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="Tipo_Proyecto in info" :key="Tipo_Proyecto.IdTipoProyecto">
+            <tr v-for="categoria in list.categoria_full" :key="categoria.idcategoria">
                 <th scope="col"></th>
-                <td>{{Tipo_Proyecto.Id_Tipo_Proyecto}} </td>
-                <td>{{Tipo_Proyecto.Nombre_Tipo_Proyecto}} </td>
-                <td>{{Tipo_Proyecto.Descripcion}} </td>
-                <td v-if="login.user_role === 'Administrador'" ><button v-on:click="update_local(Tipo_Proyecto)" type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal" >Modificar</button></td>
+                <td>{{categoria.idcategoria}} </td>
+                <td>{{categoria.nombre}} </td>
+                <td>{{categoria.descripcion}} </td>
+                <td v-if="login.user_role === 'Administrador'" ><button v-on:click="update_local(categoria)" type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal" >Modificar</button></td>
             </tr>
         </tbody>
     </table>
@@ -38,8 +38,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" v-if="data.id == ''">Nuevo tipo de proyecto</h5>
-                <h5 class="modal-title" id="exampleModalLabel" v-if="data.id != ''">Modificar tipo de proyecto</h5>
+                    {{data}}
+
+                <h5 class="modal-title" id="exampleModalLabel" v-if="data.idcategoria == ''">Nuevo tipo de proyecto</h5>
+                <h5 class="modal-title" id="exampleModalLabel" v-if="data.idcategoria != ''">Modificar tipo de proyecto</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -60,13 +62,12 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="close">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="add" v-if="data.id==''">Agregar</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="add" v-if="data.idcategoria==''">Agregar</button>
             <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="update" v-else>Modificar</button>
         </div>
         </div>
     </div>
 </div>
-
 </template>
 
 <script>
@@ -77,9 +78,11 @@ export default {
     el: 'app',
     data () {
         return {
-            info: null,
+            list:{
+                categoria_full:null,
+            },
             data:{
-                id:"",
+                idcategoria:"",
                 nombre:"",
                 descripcion:"",
             },
@@ -93,17 +96,17 @@ export default {
     },  
     methods: {
         load: function(event) {
-                let url = store.getters.getApiName + "Catalagos/tipo_Proyecto"; 
+                let url = store.getters.getApiName + "Catalagos/categoria"; 
                 axios.get(url)
                     .then((res) => {
-                        this.info = res.data.data;
+                        this.list.categoria_full = res.data.data;
                     });
         },
         add: function(event) {
-                let url = store.getters.getApiName + "Catalagos/tipo_Proyecto"; 
+                let url = store.getters.getApiName + "Catalagos/categoria"; 
                 let data = new FormData();
-                    data.append("tipo_Proyecto", this.data.nombre);
-                    data.append("description", this.data.descripcion);
+                    data.append("nombre", this.data.nombre);
+                    data.append("description", this.data.description);
                 axios.post(url,data)
                     .then((res) => {
                         if(res.status==200) {
@@ -112,10 +115,10 @@ export default {
                     });
         },        
         update:function(event){
-            let url = store.getters.getApiName + "Catalagos/tipo_Proyecto_update"; 
+            let url = store.getters.getApiName + "Catalagos/categoria_update"; 
             let data = new FormData();
-                    data.append("id", this.data.id);
-                    data.append("tipo_Proyecto", this.data.nombre);
+                    data.append("id", this.data.idcategoria);
+                    data.append("nombre", this.data.nombre);
                     data.append("description", this.data.descripcion);
                     
             axios.post(url,data)
@@ -127,15 +130,18 @@ export default {
                     });
         },        
         update_local: function (datos) {
-            this.data.id=datos.Id_Tipo_Proyecto;
-            this.data.nombre=datos.Nombre_Tipo_Proyecto;
-            this.data.descripcion=datos.Descripcion;
+            this.data.idcategoria=datos.idcategoria;
+            this.data.nombre=datos.nombre;
+            this.data.descripcion=datos.descripcion;
+
         },
         close: function(event) {
             this.data.id="";
             this.data.nombre="";
             this.data.descripcion="";
         },
+
+
     }
 }
 </script>

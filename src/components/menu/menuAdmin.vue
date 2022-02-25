@@ -59,8 +59,8 @@
             </router-link>
           </li>
           <li class="sub_menu--item">
-            <router-link to="/tipoProyectos">
-              <a href="#" class="sub_menu--link">Tipo de proyecto</a>
+            <router-link to="/categorias">
+              <a href="#" class="sub_menu--link">Categoria</a>
             </router-link>
           </li>
           <li class="sub_menu--item">

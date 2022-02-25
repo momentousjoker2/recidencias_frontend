@@ -10,43 +10,7 @@
         </div>
     </div>
     <br/>
-    <div class="card">
-        <div class="card-body">
-           {{data_filter}}
-                <div class="form-group">
-                    <label for="exampleInputName2">Numero de control del alumno</label>
-                    <input type="text" class="form-control" id="exampleInputName2" v-model="data_filter.id" v-on:change="filtrar" >
-                </div>
-
-                <div class="form-group">
-                    <label for="exampleInputEmail2">Nombre del alumno</label>
-                    <input type="email" class="form-control" id="exampleInputEmail2" v-model="data_filter.nombre">
-                </div>
-
-                <div class="form-group">
-                    <label for="exampleInputEmail2">Semestre</label>
-                    <select class="form-control" v-model="data_filter.semestre">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                        <option>11</option>
-                        <option>12</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="exampleInputEmail2">Carrera</label>
-                    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
-                </div>
-            </div>  
-    </div>
+    
     <br/>
     <div class="card">
         <div class="card-body">
@@ -62,10 +26,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="Estudiantes in info.filtrar" :key="Estudiantes.ID " >
+                        <tr v-for="Estudiantes in info.full" :key="Estudiantes.ID " >
                             <td>{{Estudiantes.ID}} </td>
                             <td>{{Estudiantes.Nombre }}</td>
-                            <td>{{Estudiantes.Semestre}}  </td>
+                            <td>{{Estudiantes.semestre}}  </td>
                             <td>{{Estudiantes.Carrera}}  </td>
                             <td>{{Estudiantes.Actividades}}  </td>
                             <td>{{Estudiantes.Semestre}}  </td>

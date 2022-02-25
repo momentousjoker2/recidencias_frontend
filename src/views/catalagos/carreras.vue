@@ -26,9 +26,9 @@
                     <tbody>
                         <tr v-for="carreras in info" :key="carreras.IdCar">
                                 <th scope="col"></th>
-                                <td>{{carreras.id_Carrera}} </td>
-                                <td>{{carreras.Nombre_Carrera}} </td>
-                                <td>{{carreras.Siglas_Carrera}} </td>
+                                <td>{{carreras.idcar}} </td>
+                                <td>{{carreras.nombrecar}} </td>
+                                <td>{{carreras.siglas}} </td>
                         </tr>
                     </tbody>
                 </table>

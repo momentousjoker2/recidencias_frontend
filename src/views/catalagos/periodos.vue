@@ -69,6 +69,7 @@
         </div>
     </div>
 </div>
+{{this.info}}
 </template>
 <script>
 import axios from "axios";

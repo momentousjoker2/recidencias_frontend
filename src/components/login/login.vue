@@ -7,7 +7,7 @@
         <label class="form-label" for="#password">Password:</label>
         <input v-model="password" class="form-input" type="password" id="password" placeholder="Password" >
         <div><br></div>
-    <p v-if="error" class="alert alert-danger" role="alert">Has introducido mal el usuario o la contraseña.</p>
+    <p v-if="error.estado" class="alert alert-danger" role="alert">{{this.error.message}}</p>
     <input class="form-submit" type="submit" value="Login">
     </form>
 </div>
@@ -23,7 +23,10 @@ export default {
     data: () => ({
         username: "",
         password: "",
-        error: false
+        error: {
+            estado: false,
+            message: ""
+        }
     }),
     created () {
     },
@@ -42,12 +45,12 @@ export default {
 
         axios.get(url,params)
             .then((res) => {
-                console.log("RESPONSE RECEIVED: ", res);
-                if(res.data.Error){
-                    this.error=true;
+                
+                if(res.data.error){
+                    this.error.estado=true;
+                    this.error.message="Has introducido mal el usuario o la contraseña."
                 }else{
                     this.error=false;
-
                     store.commit("setIdUsername",res.data.username)
                     store.commit("setUsername",res.data.nombre)        
                     store.commit("setUserRol",res.data.rol)
@@ -58,6 +61,8 @@ export default {
             })
             .catch((err) => {
                 console.log("AXIOS ERROR: ", err);
+                    this.error.estado=true;
+                    this.error.message="Error con el servidor."            
             })
         }
     }

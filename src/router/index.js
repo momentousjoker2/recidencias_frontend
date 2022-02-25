@@ -19,7 +19,7 @@ import catalagoProyecto from '@/views/catalagos/catalagoProyecto.vue'
 import departamento from '@/views/catalagos/departamentos.vue'
 import maestros from '@/views/catalagos/maestros.vue'
 import periodos from '@/views/catalagos/periodos.vue'
-import tipoProyectos from '@/views/catalagos/tipoProyecto.vue'
+import categorias from '@/views/catalagos/categorias.vue'
 //import alumnos from ''
 
 
@@ -70,9 +70,9 @@ const routes = [
         component: periodos,
     },
     {
-        path: "/tipoProyectos",
-        name: "tipoProyectos",
-        component: tipoProyectos,
+        path: "/categorias",
+        name: "categorias",
+        component: categorias,
     },
 ]
 

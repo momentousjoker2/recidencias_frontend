@@ -25,10 +25,10 @@
                     </thead>
                     <tbody>
                         <tr v-for="Empleados in info" :key="Empleados.Id_Personal">
-                            <td>{{Empleados.Id_Personal}} </td>
-                            <td>{{Empleados.Nombre_Personal}}</td>
-                            <td>{{Empleados.Id_Departamento}}  </td>
-                            <td>{{Empleados.Puesto}}  </td>
+                            <td>{{Empleados.id_pers}} </td>
+                            <td>{{Empleados.nom_pers}}</td>
+                            <td>{{Empleados.id_depto}}  </td>
+                            <td>{{Empleados.puesto}}  </td>
                         </tr>
                     </tbody>
                 </table>
