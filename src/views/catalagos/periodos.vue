@@ -1,5 +1,12 @@
 <template>
 <br/>
+    <div class="card">
+        <div class="card-body">
+            <h4 align="center">Registrar Periodo</h4>
+            <button type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal"> Nuevo periodo</button>
+        </div>
+    </div>
+    <br/>
 <div class="card">
     <div class="card-body">
         <h4 class="card-title" align="center">Consulta</h4>
@@ -17,8 +24,8 @@
             <tr v-for="Periodo in info" :key="Periodo.Id_Periodo">
                 
                 <th scope="col"></th>
-                <td>{{Periodo.Id_Periodo}} </td>
-                <td>{{Periodo.Nombre_Periodo}} </td>
+                <td>{{Periodo.idperiodo}} </td>
+                <td>{{Periodo.nombre}} </td>
                 <td>{{Periodo.status}} </td>
                 <td v-if="login.user_role === 'Administrador'" ><button v-on:click="update_local(Periodo)" type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal" >Modificar</button></td>
             </tr>
@@ -26,14 +33,7 @@
     </table>
     </div>
 </div> 
-<div>
-    <div class="card">
-        <div class="card-body">
-            <h4 align="center">Registrar Periodo</h4>
-            <button type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal"> Nuevo</button>
-        </div>
-    </div>
-</div>
+
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -69,7 +69,6 @@
         </div>
     </div>
 </div>
-{{this.info}}
 </template>
 <script>
 import axios from "axios";

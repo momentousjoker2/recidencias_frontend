@@ -1,163 +1,91 @@
 <template>
-<h4 align="center">Registrar Actividad</h4>
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title" align="center">Departamento</h4>
-        <form>
-            <div class="custom-control custom-control-inline">
-                <label>Nombre departamento:</label>
-                <select name="nombre_departamento" class="custom-select"  v-model="data.departamento_selecion" @change="filtrarEmpleados()" required >
-                    <option v-for="Departamento in departamento_info" :key="Departamento.id_Departamento" :value="Departamento">{{Departamento.Nombre_Departamento}}</option>
-                </select>
-            </div>
-        </form>
+<h1 align="center"> Proyecos activos</h1>
+    <div class="card">
+        <div class="card-body">
+            <button type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal"> Nuevo</button>
+        </div>
     </div>
-</div>
-<br/>
+    <br>
+    <br>
 <div class="card">
-    <div class="card-body">
-        <h4 class="card-title" align="center">Jefe de departamento</h4>
-        <form>
-            <div class="custom-control custom-control-inline">
-                <label>Nombre:</label>
-                <select name="Nombre" class="custom-select" v-model="data.jefePersonal_select" required>
-                    <option v-for="JefePersonal in personal_info.listaJefeDepartamento" :key="JefePersonal.Id_Personal" :value="JefePersonal" selected>{{JefePersonal.Nombre_Personal}}</option>
-                </select>
-            </div>
-            <div class="custom-control custom-control-inline">
-                <label>Puesto:</label>
-                <label>{{data.jefePersonal_select.Puesto}}</label>
-            </div>
-            <div class="custom-control custom-control-inline">
-                <label>Departamento:</label>
-                <label>{{data.jefePersonal_select.Id_Departamento}}</label>
-            </div>
-        </form>
+        <div class="card-body">
+            <form>
+                <table class="table table-sm">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">id activida</th>
+                            <th scope="col">departamento</th>
+                            <th scope="col">jefe de departamento</th>
+                            <th scope="col">responsable</th>
+                            <th scope="col">hora inicio</th>
+                            <th scope="col">hora fin</th>
+                            <th scope="col">periodo</th>
+                            <th scope="col">fecha inicio</th>
+                            <th scope="col">fecha cierre</th>
+                            <th scope="col">numero alumnos</th>
+                            <th scope="col">estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="proyectos in this.list.Alta_Proyectos" :key="proyectos.idactivida">
+                                <td>{{proyectos.idactivida}} </td>
+                                <td>{{proyectos.departemento.nombre_departamento}} </td>
+                                <td>{{proyectos.jefedepartamento.nombre_jefedepartamento}} </td>
+                                <td>{{proyectos.responsable.nombre_responsable}} </td>
+                                <td>{{proyectos.horainicio}} </td>
+                                <td>{{proyectos.horafin}} </td>
+                                <td>{{proyectos.periodo.nombre_periodo}} </td>
+                                <td>{{proyectos.fechainicio}} </td>
+                                <td>{{proyectos.fechacierre}} </td>
+                                <td>{{proyectos.numeroalumnos}} </td>
+                                <td>{{proyectos.estado}} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
     </div>
-</div>
-<br/>
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title" align="center">Responsable de actividad</h4>
-        <form>
-            <div class="custom-control custom-control-inline">
-                <label>Nombre:</label>
-                <select name="Nombre" class="custom-select" v-model="data.Personal_select" required>
-                    <option v-for="Personal in personal_info.listaPersonalEncargado" :key="Personal.Id_Personal" :value="Personal" selected>{{Personal.Nombre_Personal}}</option>
-                </select>
-            </div>
-            <div class="custom-control custom-control-inline">
-                <label>Puesto:</label>
-                <label>{{data.Personal_select.Puesto}}</label>
-            </div>
-            <div class="custom-control custom-control-inline">
-                <label>Departamento:</label>
-                <label>{{data.Personal_select.Id_Departamento}}</label>
-            </div>
-        </form>
-    </div>
-</div>
-<br/>
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title" align="center">Tipo Proyecto</h4>
-        <form>
-            <div class="custom-control custom-control-inline">
-                <label>Nombre:</label>
-                <select name="Nombre" class="custom-select" v-model="data.tipo_Proyecto_select" required>
-                    <option v-for="tipo_Proyecto in tipo_Proyecto_info" :key="tipo_Proyecto.Id_Tipo_Proyecto" :value="tipo_Proyecto">{{tipo_Proyecto.Nombre_Tipo_Proyecto}}</option>
-                </select>
-            </div>
-            <div class="custom-control custom-control-inline">
-                <label>Descripcion:</label>
-                <label>{{data.tipo_Proyecto_select.Descripcion}}</label>
-            </div>
-        </form>
-    </div>
-</div>
-<br/>
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title" align="center">Actividad</h4>
-        <form>
-            <div class="custom-control custom-control-inline">
-                <label>Nombre de la actividad:</label>
-                <input type="text" id="NombreA" name="NombreA" v-model="data.NombreA" required>
-            </div>
-            <br/>
-            <br/>
-            <div class="custom-control custom-control-inline">
-                <label>Horario Inicial:</label>
-                <input type="time" id="horario" name="horario" v-model="data.horarioInicio" required>
-            </div>
-            <div class="custom-control custom-control-inline">
-                <label>Horario Final:</label>
-                <input type="time" id="horario" name="horario" v-model="data.horarioFinal" required>
-            </div>
-            <br/>
-            <br/>
-            <div class="custom-control custom-control-inline">
-                <label>Periodo:</label>
-                <select id="periodo" name="periodo"  v-model="data.periodo" required>
-                    <option value="EneroJunio" selected>Enero-Junio</option>
-                    <option value="AgostoDiciembre">Agosto-Diciembre</option>
-                    <option value="verano">Verano</option>
-                </select>
-            </div>
-            <div class="custom-control custom-control-inline">
-                <label>Creditos Aprobados:</label>
-                <select name="Creditos"  v-model="data.Creditos" required>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </div>
-            <br/>
-            <br/>
-            <div class="custom-control custom-control-inline">
-                <label>Fecha de inicio:</label>
-                <input type="date" id="fechaI" name="fechaI" v-model="data.FechaInicio" required>
-            </div>
-            <div class="custom-control custom-control-inline">
-                <label>Fecha de Fin:</label>
-                <input type="date" id="fechaF" name="fechaF" v-model="data.FechaCierre" required>
-            </div>
-            <br/>
-            <br/>
-            <div class="custom-control custom-control-inline">
-                <label>Horas Semanales:</label>
-                <input type="number" id="Horas" name="Horas" v-model="data.HorasSemanales" required>
-            </div>
-            <div class="custom-control custom-control-inline">
-                <label>Numero de alumnos permitidos:</label>
-                <input type="number" id="Horas" name="Horas" v-model="data.noAlumnos" required>
-            </div>
-        </form>
-    </div>
-</div>
-<br/>
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title" align="center">Formato de aprobacion</h4>
-        <form>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="formatoA" name="formatoA" @change="file" accept="application/pdf" required>
-                <label class="custom-file-label" for="formatoA">Subir formato</label>
-            </div>
-        </form>
-    </div>
-</div>
-<br/>
-<div class="card">
-    <div class="card-body">
-        <center><button type="button" class="btn btn-primary btn-lg" v-on:click="addProyecto">Agregar Actividad</button></center>
-    </div>
-</div>
-<br/>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
 
-{{data}}
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab-01">
+                        <p> Parte 1 Fusce ut neque justo, et aliquet enim. In hac habitasse dictumst. Nullam commodo que erat, vitae facilisis erat. Cras at mauris ut tortor vestibulum fringilla vel sed metus. Donec interdum purus a justo feugiat rutrum. Sed ac neque ut neque dictum accumsan. Cras lacinia rutrum risus, id viverra metus dictum sit amet. Fusce venenatis, urna eget cursus placerat, dui nisl fringilla purus, nec tincidunt sapien justo ut nisl. Curabitur lobortis semper neque et varius. Etiam eget lectus risus, a varius orci. Nam placerat mauris at dolor imperdiet at aliquet lectus ultricies. Duis tincidunt mi at quam condimentum lobortis.</p>
+                        <a data-toggle="tab" class="btn btn-primary" href="#tab-02">Siguiente</a>
+                    </div>
+                    <div class="tab-pane" id="tab-02">
+                        <p>Parte 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id neque nec enim ultricies congue quis a lectus. Nulla placerat pellentesque enim eu pharetra. Nullam ornare velit vel est porttitor convallis. Nullam lobortis erat a iaculis vulputate. Vivamus vel nibh nec metus aliquam placerat in et magna. Donec ornare, metus vel ultricies porta, nisl sem vulputate sapien, sed ullamcorper purus nisi at quam. Duis sollicitudin pharetra condimentum. Mauris enim felis, placerat ac luctus id, sagittis id mauris. In varius rutrum arcu, vitae tristique urna ultrices nec. Maecenas purus turpis, congue in consequat elementum, rutrum id purus. Donec quis arcu ultricies erat viverra pretium eleifend dignissim urna.</p>
+                        <a data-toggle="tab" class="btn btn-primary" href="#tab-03">Siguiente</a>
+                    </div>
+                    <div class="tab-pane" id="tab-03">
+                        <p>Parte 3 Fusce ultrices dapibus risus, ac pellentesque sem pretium vel. Phasellus laoreet egestas lectus, nec fringilla elit sollicitudin et. Nam lectus purus, interdum et fringilla vitae, luctus vitae arcu. Praesent interdum, purus quis vehicula ultricies, odio libero imperdiet neque, eu dignissim nibh urna at tellus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed posuere arcu. Maecenas fringilla nisi et pharetra iaculis. Nam neque tortor, egestas eget nunc ac, tempus facilisis justo. Ut et tempus dui.</p>
+                        <p>Aenean euismod, eros dignissim interdum venenatis, elit neque sodales ligula, sed pretium ante velit pulvinar risus. Vestibulum at sem rhoncus turpis vestibulum ullamcorper et ut erat. Vivamus sit amet consectetur velit, eget pretium nibh.</p>
+                        <a data-toggle="tab" class="btn btn-primary" href="#tab-04">Siguiente</a>
+                    </div>
+                    <div class="tab-pane" id="tab-04">
+                        <p>Parte 4 Maecenas eu placerat ante. Fusce ut neque justo, et aliquet enim. In hac habitasse dictumst. Nullam commodo que erat, vitae facilisis erat. Cras at mauris ut tortor vestibulum fringilla vel sed metus. Donec interdum purus a justo feugiat rutrum. Sed ac neque ut neque dictum accumsan. Cras lacinia rutrum risus, id viverra metus dictum sit amet. Fusce venenatis, urna eget cursus placerat, dui nisl fringilla purus, nec tincidunt sapien justo ut nisl. Curabitur lobortis semper neque et varius. Etiam eget lectus risus, a varius orci. Nam placerat mauris at dolor imperdiet at aliquet lectus ultricies. Duis tincidunt mi at quam condimentum lobortis.</p>
+                        <a data-toggle="tab" class="btn btn-primary" data-dismiss="modal" v-on:click="add" >Siguiente</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </template>
 
 <script>
@@ -169,114 +97,30 @@ export default {
     el: 'app',
     data () {
         return {
-            data:{
-                departamento_selecion:{},
-                jefePersonal_select:{},
-                Personal_select:{},
-                tipo_Proyecto_select:{},
-                NombreA:"",
-                horario:"",
-                periodo:"",
-                fechaI:"",
-                fechaF:"",
-                credito:"",
-                file:null,
+            list: {
+                Alta_Proyectos:{},
+                categorias:{},
             },
+            
 
-            departamento_info: null,
-            tipo_Proyecto_info: null,
-            personal_info : {
-                listaCompleta:null,
-                listaPersonalEncargado:null,
-                listaJefeDepartamento:null,
-            },
         }
     },
     created () {
-                this.departamentos();
-                this.personal();
-                this.Tipo_Proyecto();
+        this.load();
 
     },
     methods: {
-        departamentos: function (event) {
-            let url = store.getters.getApiName + "Catalagos/departamentos"; //api url
+        load: function(event) {
+                let url = store.getters.getApiName + "Movimientos/Alta_Proyectos";
                 axios.get(url)
                     .then((res) => {
-                        this.departamento_info = res.data.data;
-                    }) .catch((err) => {
-                console.log("AXIOS ERROR: ", err);
-            });       
-        },
-        personal : function (event) {
-            let url = store.getters.getApiName + "Catalagos/empleados"; //api url
-                axios.get(url)
-                    .then((res) => {
-                        this.personal_info.listaCompleta = res.data.data;
-                    }) .catch((err) => {
-                console.log("AXIOS ERROR: ", err);
-            });   
-        },
-        Tipo_Proyecto: function (event) {
-            let url = store.getters.getApiName + "Catalagos/tipo_Proyecto"; //api url
-                axios.get(url)
-                    .then((res) => {
-                        this.tipo_Proyecto_info = res.data.data;
-                    }) .catch((err) => {
-                console.log("AXIOS ERROR: ", err);
-            });  
-        },
-        addProyecto: function (event) {
-            let url = store.getters.getApiName + "Actividades/insert"; //api url
-
-            console.log(this.data.file);
-            let datos = new FormData();
-                datos.append("IdDepartamento", this.data.departamento_selecion.id_Departamento);
-                datos.append("idJefeDepartamento", this.data.jefePersonal_select.Id_Personal);
-                datos.append("IdPersonalResponsable", this.data.Personal_select.Id_Personal);
-                datos.append("IdTipoProyecto", this.data.tipo_Proyecto_select.Id_Tipo_Proyecto);
-                datos.append("Nombre_Proyecto", this.data.NombreA);
-                datos.append("HorarioInicio", this.data.horarioInicio);
-                datos.append("HorarioFin", this.data.horarioFinal);//AQUI
-                datos.append("Periodo", this.data.periodo);
-                //datos.append("OficioAutorizacion", this.data.file,this.data.file.name);
-                datos.append("FechaInicio", this.data.FechaInicio);
-                datos.append("FechaCierre", this.data.FechaCierre);
-                datos.append("Creditos", this.data.Creditos);
-                datos.append("HorasSemanales", this.data.HorasSemanales);
-                datos.append("noAlumnos", this.data.noAlumnos);
-                datos.append("Estatus", "Abierto");
-                
-                axios.post(url,datos,{headers: { 'Content-Type': 'multipart/form-data' }})
-                        .then((res) => {
-                            console.log(res.data)
-                    }) .catch((err) => {
-                console.log("AXIOS ERROR: ", err);
-            });  
-        },
-
-        filtrarEmpleados: function (event) {
-            let ArregloJefeDepartameto =[];
-            let ArregloEmpleados = [];
-            for(let empleados of Object.values(this.personal_info.listaCompleta)){
-                if(empleados.Id_Departamento==this.data.departamento_selecion.Nombre_Departamento ){
-                    if(empleados.Puesto=="JefeDepartamento")
-                        ArregloJefeDepartameto.push(empleados);
-
-                    else
-                        ArregloEmpleados.push(empleados);
-                }
-            }
-        this.personal_info.listaPersonalEncargado=ArregloEmpleados;
-        this.personal_info.listaJefeDepartamento=ArregloJefeDepartameto;
-        },        
-        file:function (event) {
-            this.data.file=event.target.files[0];
-        },
-    },
-    
-    computed: {
-    },
+                        this.list.Alta_Proyectos = res.data.data;
+                    });
+        },      
+        add: function(event){
+            $('#tab-01').toggleClass('active');        
+            $('#tab-04').toggleClass('active');        }
+    }
 
 }
 
@@ -288,5 +132,38 @@ label{ font-size: medium;}
 input{ font-size: medium;}
 
 select{ font-size: medium;}
+.nav-tabs {
+	 border-bottom: 2px solid #dfdfdf;
+}
+ .nav-tabs > li {
+	 margin-bottom: 0;
+}
+ .nav-tabs > li > a {
+	 line-height: 18px;
+	 font-size: 12px;
+	 font-weight: 600;
+	 color: #143361;
+	 border-bottom: 5px solid #fff;
+	 padding: 12px 5px;
+	 margin: 0;
+	 border-right: 0 !important;
+	 border-left: 0 !important;
+}
+.
+ .nav-tabs > li > a:hover {
+	 background: none;
+	 color: #2984ee;
+	 border-bottom: 5px solid #fff;
+	 margin: 0;
+}
+ .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+	 outline: 0;
+	 cursor: pointer;
+	 color: #143361;
+	 border-bottom: 5px solid #143361;
+	 background: none;
+	 margin: 0;
+}
+ 
 
 </style>

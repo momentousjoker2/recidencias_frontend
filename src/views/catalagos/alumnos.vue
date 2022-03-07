@@ -4,7 +4,6 @@
     <div class="card">
         <div class="card-body">
                 <div class="custom-control custom-control-inline">
-                    <p>Traspaso de alumnos</p>
                     <center><button type="button" class="btn btn-primary btn-sm">Traspasar Alumnos</button></center>
                 </div>    
         </div>
@@ -69,6 +68,7 @@ export default {
                     .then((res) => {
                         this.info.full = res.data.data;
                     }) .catch((err) => {
+                        console.log("AXIOS ERROR: ", err);
                     });       
     },    
     methods: {

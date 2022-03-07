@@ -14,7 +14,7 @@
           </a>
         </router-link>
       </li>
-      <li class="menu--item">
+      <li class="menu--item" v-show="false">
         <router-link to="/SituacionEspecial">
           <a href="#" class="menu--link" title="Item 3">
             <i class="menu--icon fa-fw fas fa fa-star"></i>
@@ -22,7 +22,7 @@
           </a>
         </router-link>
       </li>
-      <li class="menu--item">
+      <li class="menu--item" v-show="false">
         <router-link to="/cambioFormato">
           <a href="#" class="menu--link" title="Item 3">
             <i class="menu--icon fa fa-fw fas fa-edit"></i>
@@ -87,7 +87,7 @@
             </router-link>
           </li>
           <li class="sub_menu--item">
-            <router-link to="/ActividadesActivas">
+            <router-link to="/altaProyectos">
               <a href="#" class="sub_menu--link"
                 >Activades Activas</a>
             </router-link>

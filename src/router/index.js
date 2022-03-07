@@ -15,12 +15,14 @@ import index from '@/views/index.vue'
 //Catalagos
 import alumnos from '@/views/catalagos/alumnos.vue'
 import carreras from '@/views/catalagos/carreras.vue'
-import catalagoProyecto from '@/views/catalagos/catalagoProyecto.vue'
 import departamento from '@/views/catalagos/departamentos.vue'
 import maestros from '@/views/catalagos/maestros.vue'
 import periodos from '@/views/catalagos/periodos.vue'
 import categorias from '@/views/catalagos/categorias.vue'
-//import alumnos from ''
+
+//Movimientos
+import catalagoProyecto from '@/views/movimientos/catalagoProyecto.vue'
+import altaProyectos from '@/views/movimientos/altaProyectos.vue'
 
 
 
@@ -69,11 +71,18 @@ const routes = [
         name: "periodos",
         component: periodos,
     },
+    //Movimientos 
     {
         path: "/categorias",
         name: "categorias",
         component: categorias,
     },
+    {
+        path: "/altaProyectos",
+        name: "altaProyectos",
+        component: altaProyectos,
+    },
+
 ]
 
 const router = createRouter({
