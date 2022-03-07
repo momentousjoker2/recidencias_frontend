@@ -34,7 +34,6 @@
                                 <td>{{proyectos.idactividad}} </td>
                                 <td>{{proyectos.categoria.nombre}}</td>
                                 <td>{{proyectos.nombres_proyecto}} </td>
-                                <td > <button type="button" class="btn btn-primary">Mostrar oficio</button>    </td>
                                 <td>{{proyectos.credito}} </td>
                                 <td>{{proyectos.horassemanales}} </td>
                                 <td>{{proyectos.estado}} </td>
@@ -76,8 +75,8 @@
                         <div class="form-group">
                             <label>Estados:</label>
                             <select name="status" class="custom-select form-control-sm"   v-model="data.estatus" v-bind:value="data.status" required> 
-                                <option value="Activo" >Activo</option>
-                                <option value="Inactivo">Inactivo</option>                            
+                                <option value="ACTIVO" >ACTIVO</option>
+                                <option value="INACTIVO">INACTIVO</option>                            
                             </select>
                         </div>
 
@@ -86,25 +85,26 @@
                     <div class="tab-pane" id="tab-02">
                             <div class="mb-3"> 
                                 <label>Tipo de proyecto:</label>
-                                <select name="id_TipoProyecto" class="custom-select form-control-sm" v-model="data.idcategoria" v-bind:value="data.idcategoria" required>
-                                    <option v-for="categoria in this.list.categorias" :key="categoria.idcategoria" :value="categoria.idcategoria">{{categoria.nombre}}</option>
+                                <select name="id_TipoProyecto" class="custom-select form-control-sm" v-model="data.categoria" v-bind:value="data.idcategoria" required >
+                                    <option v-for="categoria in this.list.categorias" :key="categoria.idcategoria" :value="categoria" >{{categoria.nombre}}</option>
                                 </select>
+                                <br>
+                            </div>                        
+                            <div class="mb-3"> 
+                                <label>Descripcion</label>
+                                <p>{{this.data.categoria.descripcion}}</p>
                             </div>                        
                             <a data-toggle="tab" class="btn btn-primary" href="#tab-03">Siguiente</a>
                     </div>
                     <div class="tab-pane" id="tab-03">
-                        <p>Parte 3 Fusce ultrices dapibus risus, ac pellentesque sem pretium vel. Phasellus laoreet egestas lectus, nec fringilla elit sollicitudin et. Nam lectus purus, interdum et fringilla vitae, luctus vitae arcu. Praesent interdum, purus quis vehicula ultricies, odio libero imperdiet neque, eu dignissim nibh urna at tellus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed posuere arcu. Maecenas fringilla nisi et pharetra iaculis. Nam neque tortor, egestas eget nunc ac, tempus facilisis justo. Ut et tempus dui.</p>
-                        <p>Aenean euismod, eros dignissim interdum venenatis, elit neque sodales ligula, sed pretium ante velit pulvinar risus. Vestibulum at sem rhoncus turpis vestibulum ullamcorper et ut erat. Vivamus sit amet consectetur velit, eget pretium nibh.</p>
-                        <a data-toggle="tab" class="btn btn-primary" href="#tab-04">Siguiente</a>
-                    </div>
-                    <div class="tab-pane" id="tab-04">
-                        <p>Parte 4 Maecenas eu placerat ante. Fusce ut neque justo, et aliquet enim. In hac habitasse dictumst. Nullam commodo que erat, vitae facilisis erat. Cras at mauris ut tortor vestibulum fringilla vel sed metus. Donec interdum purus a justo feugiat rutrum. Sed ac neque ut neque dictum accumsan. Cras lacinia rutrum risus, id viverra metus dictum sit amet. Fusce venenatis, urna eget cursus placerat, dui nisl fringilla purus, nec tincidunt sapien justo ut nisl. Curabitur lobortis semper neque et varius. Etiam eget lectus risus, a varius orci. Nam placerat mauris at dolor imperdiet at aliquet lectus ultricies. Duis tincidunt mi at quam condimentum lobortis.</p>
+                        <div class="mb-3"> 
+                            <label>Oficio de Autorizacion:</label>
+                            <input style="border : none; -webkit-appearance: none ; border-width:0px;" class="form-control-plaintext form-control-sm form-control" id="OficioAutorizacion" name="OficioAutorizacion" type="file" @change="FilesLoad">
+                        </div>
                         <a data-toggle="tab" class="btn btn-primary" data-dismiss="modal" v-on:click="add" >Siguiente</a>
                     </div>
                 </div>
             </div>
-
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="close">Close</button>
             </div>
@@ -130,13 +130,13 @@ export default {
             info_tipoProyecto: null,
             data:{
                 idproyecto:"",
-                idcategoria:"",
+                categoria:{},
                 Nombre_Proyecto:"",
                 OficioAutorizacion:"",
                 Creditos:"",
                 horassemanales:"",
                 estatus:""
-            }
+            },
             
         }
     },
@@ -171,7 +171,7 @@ export default {
                 let url = store.getters.getApiName + "Movimientos/Catalagos_Proyecto"; 
 
                 let datos = new FormData();
-                    datos.append("idcategoria", this.data.idcategoria);
+                    datos.append("idcategoria", this.data.categoria.idcategoria);
                     datos.append("nombres_proyecto", this.data.Nombre_Proyecto);
                     datos.append("oficioautorizacion",file , nombre);
                     datos.append("credito", this.data.Creditos);
@@ -187,6 +187,7 @@ export default {
                     }).catch((err) => {
                         console.log("AXIOS ERROR: ", err);
                     });
+                    this.resetModel();
         },
         update:function(event){
             let url = store.getters.getApiName + "Catalagos/periodo_update";
@@ -204,9 +205,10 @@ export default {
                     }).catch((err) => {
                         console.log("AXIOS ERROR: ", err);
                     });
+                    this.resetModel();
         },
         update_local: function (datos) {
-                this.data.idcategoria=datos.idcategoria,
+                this.data.idcategoria=datos.categoria.idcategoria,
                 this.data.Nombre_Proyecto= datos.Nombre_Proyecto,
                 this.data.Creditos = datos.creditos,
                 this.data.horassemanales= datos.horassemanales,
@@ -219,7 +221,19 @@ export default {
             this.data.id="";
             this.data.nombre="";
             this.data.status="";
+            this.resetModel();
         },
+        resetModel:function(event) {
+            $('#tab-01').toggleClass('active');        
+            $('#tab-03').toggleClass('active');   
+            this.data.idproyecto="";
+            this.data.categoria={};
+            this.data.Nombre_Proyecto="";
+            this.data.OficioAutorizacion="";
+            this.data.Creditos="";
+            this.data.horassemanales="";
+            this.data.estatus="";
+            }
     }
 
 }

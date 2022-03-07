@@ -59,20 +59,91 @@
             <div class="modal-body">
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab-01">
-                        <p> Parte 1 Fusce ut neque justo, et aliquet enim. In hac habitasse dictumst. Nullam commodo que erat, vitae facilisis erat. Cras at mauris ut tortor vestibulum fringilla vel sed metus. Donec interdum purus a justo feugiat rutrum. Sed ac neque ut neque dictum accumsan. Cras lacinia rutrum risus, id viverra metus dictum sit amet. Fusce venenatis, urna eget cursus placerat, dui nisl fringilla purus, nec tincidunt sapien justo ut nisl. Curabitur lobortis semper neque et varius. Etiam eget lectus risus, a varius orci. Nam placerat mauris at dolor imperdiet at aliquet lectus ultricies. Duis tincidunt mi at quam condimentum lobortis.</p>
+                        <div class="mb-3"> 
+                            <label>Catalago de proyectos:</label>
+                                <select name="id_TipoProyecto" class="custom-select form-control-sm" v-model="data.CatalagoProyectos" required >
+                                    <option v-for="CatalagoProyectos in this.list.CatalagoProyectos" :key="CatalagoProyectos.idactividad" :value="CatalagoProyectos" >{{CatalagoProyectos.nombres_proyecto}}</option>
+                                </select>
+                                <br>
+                        </div> 
+                        <label>Creditos de actividad</label>
+                        <p>{{data.CatalagoProyectos.credito}}</p>
+
+                        <label>Horas a la semana de actividad</label>
+                        <p>{{data.CatalagoProyectos.horassemanales}}</p>
+
+                        <label>Categoria de actividad</label>                        
+                        <p>{{data.CatalagoProyectos.categoria.nombre}}</p>
+                        <br>
                         <a data-toggle="tab" class="btn btn-primary" href="#tab-02">Siguiente</a>
                     </div>
                     <div class="tab-pane" id="tab-02">
-                        <p>Parte 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id neque nec enim ultricies congue quis a lectus. Nulla placerat pellentesque enim eu pharetra. Nullam ornare velit vel est porttitor convallis. Nullam lobortis erat a iaculis vulputate. Vivamus vel nibh nec metus aliquam placerat in et magna. Donec ornare, metus vel ultricies porta, nisl sem vulputate sapien, sed ullamcorper purus nisi at quam. Duis sollicitudin pharetra condimentum. Mauris enim felis, placerat ac luctus id, sagittis id mauris. In varius rutrum arcu, vitae tristique urna ultrices nec. Maecenas purus turpis, congue in consequat elementum, rutrum id purus. Donec quis arcu ultricies erat viverra pretium eleifend dignissim urna.</p>
+                        <div class="mb-3"> 
+                            <label>Departamento del proyecto:</label>
+                                <select name="departamento" class="custom-select form-control-sm" v-model="data.departamento" required >
+                                    <option v-for="categoria in this.list.Deptos" :key="categoria.id_depto" :value="categoria" >{{categoria.nom_depto}}</option>
+                                </select>
+                                <br>
+                        </div>                        
+                        <div class="mb-3"> 
+                                <label>Encargado del departamento</label>
+                                <p>{{this.data.departamento.nom_pers}}</p>
+                        </div> 
+                        <div class="mb-3"> 
+                                <label>Responsable del proyecto:</label>
+                                <select name="PersonalResponsable" class="custom-select form-control-sm" v-model="data.PersonalResponsable" required >
+                                    <option v-for="PersonalResponsable in this.list.PersonalResponsable" :key="PersonalResponsable.id_pers" :value="PersonalResponsable" >{{PersonalResponsable.nom_pers}}</option>
+                                </select>
+                                <br>
+                                <label>Puesto</label>
+                                <p>{{this.data.PersonalResponsable.puesto}}</p>
+
+                        </div>  
+                        <br>   
                         <a data-toggle="tab" class="btn btn-primary" href="#tab-03">Siguiente</a>
                     </div>
                     <div class="tab-pane" id="tab-03">
-                        <p>Parte 3 Fusce ultrices dapibus risus, ac pellentesque sem pretium vel. Phasellus laoreet egestas lectus, nec fringilla elit sollicitudin et. Nam lectus purus, interdum et fringilla vitae, luctus vitae arcu. Praesent interdum, purus quis vehicula ultricies, odio libero imperdiet neque, eu dignissim nibh urna at tellus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed posuere arcu. Maecenas fringilla nisi et pharetra iaculis. Nam neque tortor, egestas eget nunc ac, tempus facilisis justo. Ut et tempus dui.</p>
-                        <p>Aenean euismod, eros dignissim interdum venenatis, elit neque sodales ligula, sed pretium ante velit pulvinar risus. Vestibulum at sem rhoncus turpis vestibulum ullamcorper et ut erat. Vivamus sit amet consectetur velit, eget pretium nibh.</p>
+                        <div class="mb-3"> 
+                            <label>Responsable del proyecto:</label>
+                            <select name="Periodo" class="custom-select form-control-sm" v-model="data.Periodo" required >
+                                <option v-for="Periodo in this.list.Periodo" :key="Periodo.idperiodo" :value="Periodo" >{{Periodo.nombre}}</option>
+                            </select>
+                            <br>
+                            <label>Puesto</label>
+                            <p>{{this.data.PersonalResponsable.puesto}}</p>
+                        </div>  
+                        <br>
                         <a data-toggle="tab" class="btn btn-primary" href="#tab-04">Siguiente</a>
                     </div>
                     <div class="tab-pane" id="tab-04">
-                        <p>Parte 4 Maecenas eu placerat ante. Fusce ut neque justo, et aliquet enim. In hac habitasse dictumst. Nullam commodo que erat, vitae facilisis erat. Cras at mauris ut tortor vestibulum fringilla vel sed metus. Donec interdum purus a justo feugiat rutrum. Sed ac neque ut neque dictum accumsan. Cras lacinia rutrum risus, id viverra metus dictum sit amet. Fusce venenatis, urna eget cursus placerat, dui nisl fringilla purus, nec tincidunt sapien justo ut nisl. Curabitur lobortis semper neque et varius. Etiam eget lectus risus, a varius orci. Nam placerat mauris at dolor imperdiet at aliquet lectus ultricies. Duis tincidunt mi at quam condimentum lobortis.</p>
+                        <div class="form-group">
+                            <label>fecha de inicio:</label>
+                            <input type="date"  id="fechaInicio" name="fechaInicio"  class="form-control" v-model="data.fechaInicio">
+                        </div>
+                        <div class="form-group">
+                            <label>fecha de fin:</label>
+                            <input type="date"  id="fechaCierre" name="fechaCierre"  class="form-control" v-model="data.fechaCierre">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Hora de inicio:</label>
+                            <input type="time" id="horaInicio" name="horaInicio"  class="form-control" v-model="data.horaInicio">
+                        </div> 
+                        <div class="form-group">
+                            <label>Hora de finales:</label>
+                            <input type="time" id="horaFin" name="horaFin"  class="form-control" v-model="data.horaFin">
+                        </div>                   
+                        <div class="form-group">
+                            <label>Numero de alumnos:</label>
+                            <input type="number" id="horaFin" name="horaFin"  class="form-control" v-model="data.numeroAlumnos">
+                        </div> 
+                        <div class="form-group">
+                            <label>Estados:</label>
+                            <select name="status" class="custom-select form-control-sm"   v-model="data.estatus" v-bind:value="data.status" required> 
+                                <option value="ACTIVO" >ACTIVO</option>
+                                <option value="INACTIVO">INACTIVO</option>                            
+                            </select>
+                        </div>    
                         <a data-toggle="tab" class="btn btn-primary" data-dismiss="modal" v-on:click="add" >Siguiente</a>
                     </div>
                 </div>
@@ -98,9 +169,27 @@ export default {
     data () {
         return {
             list: {
-                Alta_Proyectos:{},
-                categorias:{},
+                CatalagoProyectos:{},
+                Deptos:{},
+                PersonalResponsable:{},
+                Periodo:{}
             },
+            data:{
+                CatalagoProyectos:{
+                    credito:"",
+                    horassemanales:"",
+                    categoria:{
+                        nombre:""
+                    }
+                    },
+                departamento:{
+                    nom_pers:""
+                    },
+                PersonalResponsable:{
+                    puesto:""
+                    },
+                Periodo:null
+            }
             
 
         }
@@ -111,15 +200,34 @@ export default {
     },
     methods: {
         load: function(event) {
-                let url = store.getters.getApiName + "Movimientos/Alta_Proyectos";
+                let url = store.getters.getApiName + "Catalagos/departamentos/JefeDepartamento";
                 axios.get(url)
                     .then((res) => {
-                        this.list.Alta_Proyectos = res.data.data;
+                        this.list.Deptos = res.data.data;
+                    });
+
+                url = store.getters.getApiName + "Catalagos/empleados";
+                axios.get(url)
+                    .then((res) => {
+                        this.list.PersonalResponsable = res.data.data;
+                    });
+
+                url = store.getters.getApiName + "Movimientos/Catalagos_Proyecto";
+                axios.get(url)
+                    .then((res) => {
+                        this.list.CatalagoProyectos = res.data.data;
+                    });
+                
+                url = store.getters.getApiName + "Catalagos/periodo";
+                axios.get(url)
+                    .then((res) => {
+                        this.list.Periodo = res.data.data;
                     });
         },      
         add: function(event){
             $('#tab-01').toggleClass('active');        
-            $('#tab-04').toggleClass('active');        }
+            $('#tab-04').toggleClass('active');        
+        }
     }
 
 }
@@ -132,38 +240,7 @@ label{ font-size: medium;}
 input{ font-size: medium;}
 
 select{ font-size: medium;}
-.nav-tabs {
-	 border-bottom: 2px solid #dfdfdf;
-}
- .nav-tabs > li {
-	 margin-bottom: 0;
-}
- .nav-tabs > li > a {
-	 line-height: 18px;
-	 font-size: 12px;
-	 font-weight: 600;
-	 color: #143361;
-	 border-bottom: 5px solid #fff;
-	 padding: 12px 5px;
-	 margin: 0;
-	 border-right: 0 !important;
-	 border-left: 0 !important;
-}
-.
- .nav-tabs > li > a:hover {
-	 background: none;
-	 color: #2984ee;
-	 border-bottom: 5px solid #fff;
-	 margin: 0;
-}
- .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-	 outline: 0;
-	 cursor: pointer;
-	 color: #143361;
-	 border-bottom: 5px solid #143361;
-	 background: none;
-	 margin: 0;
-}
+
  
 
 </style>
