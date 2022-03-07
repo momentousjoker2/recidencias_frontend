@@ -1,5 +1,5 @@
 <template>
-    <h1 align="center">traspasar Maestros</h1>
+    <h1 align="center">Traspasar Maestros</h1>
     <br />
     <div class="card">
         <div class="card-body">
@@ -18,7 +18,7 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Clave Docente</th>
-                            <th scope="col">Nombre del Docente</th>
+                            <th scope="col">Nombre Del Docente</th>
                             <th scope="col">Departamento</th>
                             <th scope="col">Puesto</th>
                         </tr>

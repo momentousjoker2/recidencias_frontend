@@ -2,19 +2,19 @@
 <br/>
     <div class="card">
         <div class="card-body">
-            <h4 align="center">Registrar Periodo</h4>
-            <button type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal"> Nuevo periodo</button>
+            <h4 align="center">Registrar Período</h4>
+            <button type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal"> Nuevo Periodo</button>
         </div>
     </div>
     <br/>
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title" align="center">Consulta</h4>
+        <h4 class="card-title" align="center">Consultar</h4>
         <table class="table table-sm">
         <thead class="thead-dark">
             <tr>
                 <th scope="col"></th>
-                <th scope="col">ID:</th>
+                <th scope="col">Clave:</th>
                 <th scope="col">Nombre:</th>
                 <th scope="col">Status:</th>
                 <th scope="col" v-if="login.user_role === 'Administrador'" > Modificar</th>
@@ -38,7 +38,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Nuevo Periodo</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Nuevo Período</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

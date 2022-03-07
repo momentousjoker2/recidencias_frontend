@@ -1,5 +1,5 @@
 <template>
-    <h1 align="center"> traspasar Alumno</h1>
+    <h1 align="center"> Traspasar Alumnos</h1>
     <br />
     <div class="card">
         <div class="card-body">
@@ -17,8 +17,8 @@
                 <table class="table table-sm">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">No. control</th>
-                            <th scope="col">Nombre del Alumno</th>
+                            <th scope="col">No. Control</th>
+                            <th scope="col">Nombre Del Alumno</th>
                             <th scope="col">Semestre</th>
                             <th scope="col">Carrera</th>
                             <th scope="col">Actividades</th>

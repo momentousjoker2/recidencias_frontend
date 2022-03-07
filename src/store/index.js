@@ -9,7 +9,8 @@ const store = new Vuex.Store({
             key: "3aebc6817c43ee5433194c9c2138cd72",
         },
         login: {
-            islogged: sessionStorage.getItem("islogged"),
+            //islogged: sessionStorage.getItem("islogged"),
+            islogged: true,
             User_id: sessionStorage.getItem("User_id"),
             User_username: sessionStorage.getItem("User_username"),
             User_rol: sessionStorage.getItem("User_rol"),

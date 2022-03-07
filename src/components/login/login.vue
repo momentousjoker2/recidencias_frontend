@@ -1,6 +1,6 @@
 <template>
 <div class="login">
-    <h1 class="title">Login in the page</h1>
+    <h1 class="title">Bienvenido, Inicia sesión.</h1>
     <form action class="form" @submit.prevent="login">
         <label class="form-label" for="#username">Usuario:</label>
         <input v-model="username" class="form-input" type="text" id="username" required placeholder="Usuario" >
@@ -85,7 +85,7 @@ export default {
     width: 20%;
     min-width: 350px;
     max-width: 100%;
-    background: rgba(19, 35, 47, 0.9);
+    background: #13232fe6;
     border-radius: 5px;
     padding: 40px;
     box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);

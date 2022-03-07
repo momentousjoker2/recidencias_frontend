@@ -1,15 +1,15 @@
 <template>
-    <h1 align="center"> Proyectos periodo</h1>
+    <h1 align="center"> Proyectos Período</h1>
     <br/>
     <div class="card">
         <div class="card-body">
             <form>
                 <div class="custom-control custom-control-inline">
-                    <label>Fecha de inicio:</label>
+                    <label>Fecha De Inicio:</label>
                     <input type="date" id="fechaI" name="fechaI">
                 </div>
                 <div class="custom-control custom-control-inline">
-                    <label>Fecha de Fin:</label>
+                    <label>Fecha De Fin:</label>
                     <input type="date" id="fechaF" name="fechaF">
                 </div>
             </form>

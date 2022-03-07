@@ -3,22 +3,22 @@
 <div>
     <div class="card">
         <div class="card-body">
-            <h4 align="center">Registrar categoria de proyecto</h4>
-            <button type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal"> Nuevo categoria</button>
+            <h4 align="center">Registrar Categoría De Proyecto</h4>
+            <button type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal"> Nueva Categoría</button>
         </div>
     </div>
 </div>
 <br/>
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title" align="center">Consulta</h4>
+        <h4 class="card-title" align="center">Consultar</h4>
         <table class="table table-sm">
         <thead class="thead-dark">
             <tr>
                 <th scope="col"></th>
-                <th scope="col">ID:</th>
+                <th scope="col">Clave:</th>
                 <th scope="col">Nombre:</th>
-                <th scope="col">Descripcion:</th>
+                <th scope="col">Descripción:</th>
                 <th scope="col" v-if="login.user_role === 'Administrador'" > Modificar</th>
             </tr>
         </thead>
@@ -38,8 +38,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" v-if="data.idcategoria == ''">Nuevo tipo de proyecto</h5>
-                    <h5 class="modal-title" id="exampleModalLabel" v-if="data.idcategoria != ''">Modificar tipo de proyecto</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" v-if="data.idcategoria == ''">Nuevo Tipo De Proyecto</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" v-if="data.idcategoria != ''">Modificar Tipo De Proyecto</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -51,7 +51,7 @@
                             <input type="text" id="Nombre" name="Nombre"  class="form-control" v-model="data.nombre">
                         </div>
                         <div class="form-group">
-                            <label>Descripcion:</label>
+                            <label>Descripción:</label>
                             <textarea type="text" id="descripcion" name="descripcion"  class="form-control" v-model="data.descripcion" rows="5"/>
                         </div>
                     </form>

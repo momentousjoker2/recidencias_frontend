@@ -7,15 +7,15 @@
             <table class="table table-sm">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Id Actividades</th>
+                        <th scope="col">Clave Actividades</th>
                         <th scope="col">Departamento</th>
-                        <th scope="col">Jefe De departamento</th>
+                        <th scope="col">Jefe De Departamento</th>
                         <th scope="col">Responsable Actividades</th>
                         <th scope="col">Tipo Proyectos</th>
                         <th scope="col">Nombre Actividades</th>
-                        <th scope="col">Periodo</th>                        
+                        <th scope="col">Período</th>                        
                         <th scope="col">Fecha Inicio</th>
-                        <th scope="col">Fecha final</th>
+                        <th scope="col">Fecha Final</th>
                         <th scope="col">Creditos</th>
                         <th scope="col">Alumbos Permitidos</th>
                     </tr>

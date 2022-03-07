@@ -1,5 +1,5 @@
 <template>
-  <h4 align="center">Cambio de formato</h4>
+  <h4 align="center">Cambio De Formato</h4>
   <br />
   <div class="card">
     <div class="card-body">

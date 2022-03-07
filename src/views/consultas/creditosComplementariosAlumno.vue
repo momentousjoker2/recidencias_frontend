@@ -12,7 +12,7 @@
                 <input type="text" id="nombre" name="nombre">
             </div>
             <div class="custom-control custom-control-inline">
-                <label>Apellido paterno:</label>
+                <label>Apellido Paterno:</label>
                 <input type="text" id="ApellidoP" name="ApellidoP">
             </div>
             <div class="custom-control custom-control-inline">
@@ -34,7 +34,7 @@
                 <input type="text" id="Carrera" name="Carrera">
             </div>
             <div class="custom-control custom-control-inline">
-                <label>Periodo:</label>
+                <label>Período:</label>
                 <input type="text" id="Periodo" name="Periodo">
             </div>
         </form>
@@ -43,7 +43,7 @@
 <br/>
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title" align="center">Ordenar por</h4>
+        <h4 class="card-title" align="center">Ordenar Por</h4>
         <form>
             <div class="form-check-inline">
                 <label class="form-check-label">

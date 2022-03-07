@@ -1,5 +1,5 @@
 <template>
-    <h1 align="center"> traspasar carreras</h1>
+    <h1 align="center"> Traspasar Carreras</h1>
     <br />
     <div class="card">
         <div class="card-body">
@@ -21,7 +21,7 @@
                             <th scope="col">Clave Carrera</th>
                             <th scope="col">Nombre Carrera</th>
                             <th scope="col">Siglas</th>
-                            <th scope="col">Departamentos</th>
+                            <th scope="col">Departamento</th>
                             <th scope="col" v-if="login.user_role === 'Administrador'" > Modificar</th>
                         </tr>
                     </thead>
@@ -43,14 +43,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modificar tipo de proyecto</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Modificar Tipo De Proyecto</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label class="control-label" for="email-01">Nombre:</label>
+                    <label class="control-label" for="email-01">Nombre</label>
                     <input class="form-control" id="email-01" placeholder="Nombre de la carrera" type="text" v-model="data.nombrecar">
                 </div>
                 <div class="form-group">

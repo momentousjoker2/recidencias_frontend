@@ -8,23 +8,23 @@
             <tr>
                 <th scope="col"></th>
                 <th scope="col">Actividad:</th>
-                <th scope="col">Descripcion:</th>
-                <th scope="col">Fecha de inicio:</th>
-                <th scope="col">Fecha de finalizacion:</th>
+                <th scope="col">Descripción:</th>
+                <th scope="col">Fecha De Inicio:</th>
+                <th scope="col">Fecha De Finalización:</th>
                 <th scope="col">Encargado:</th>
                 <th scope="col">Estatus:</th>
-                <th scope="col">Descargar constancia</th>
+                <th scope="col">Descargar Constancia</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th scope="row"></th>
-                <td>Fomento a la lectura</td>
-                <td>Paseo a la FIL en Guadalajara</td>
+                <td>Fomento A La Lectura</td>
+                <td>Paseo A La FIL En Guadalajara</td>
                 <td>29/11/2021</td>
                 <td>04/12/2021</td>
                 <td>Maria Torrez Vargas</td>
-                <td>en curso</td>
+                <td>En Curso</td>
                 <td><button type="button" class="btn btn-primary btn-sm">Descargar</button></td>
             </tr>
         </tbody>
