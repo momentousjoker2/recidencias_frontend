@@ -4,7 +4,7 @@ const store = new Vuex.Store({
     state: {
         api: {
             //name: "http://localhost:8081/",
-            name: "http://192.168.196.6:8081/",
+            name: "http://10.32.150.91:8081/",
             key: "3aebc6817c43ee5433194c9c2138cd72",
         },
         login: {
