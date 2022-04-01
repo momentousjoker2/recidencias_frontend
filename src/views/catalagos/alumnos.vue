@@ -30,14 +30,50 @@
                             <td>{{Estudiantes.Nombre }}</td>
                             <td>{{Estudiantes.semestre}}  </td>
                             <td>{{Estudiantes.Carrera}}  </td>
-                            <td>{{Estudiantes.Actividades}}  </td>
-                            <td>{{Estudiantes.Semestre}}  </td>
+                            <td><button v-on:click="mostrar(Estudiantes)" type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal" >Mostrar</button></td>
                         </tr>
                     </tbody>
                 </table>
             </form>
         </div>
     </div>
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Numero de actividades por alumno</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-sm">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Categoria</th>
+                            <th scope="col">Actividades realizadas</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="Actividades in info.datosM.categorias" :key="Actividades " >
+                            <td>{{Actividades.Nombre}} </td>
+                            <td>{{Actividades.Contador }}</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            
+            
+            </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="close">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
 </template>
 
 <script>
@@ -51,20 +87,24 @@ export default {
         return {
             info:{
                 full:null,
-                filtrar:null,
-            },
-            data_filter:{
-                id:"",
-                nombre:"",
-                semestre: "",
-                carrera: "",
+                datosM:{
+                    Nombre:"",
+                    Contador: "",
+                }
             }
-            
         }
     },
+    store: store,
     created () {
+        let params =
+        {
+            params:{
+                        depto:  store.getters.getDepto,
+                    }
+        }
+
                 let url = store.getters.getApiName + "Catalagos/estudiantes"; 
-                axios.get(url)
+                axios.get(url,params)
                     .then((res) => {
                         this.info.full = res.data.data;
                     }) .catch((err) => {
@@ -72,17 +112,11 @@ export default {
                     });       
     },    
     methods: {
-        filtrar: function (event) {
-            console.log(this.data_filter.id)
-            /* for(let empleados of Object.values(this.info)){
-                if(empleados.Id_Departamento==this.data.departamento_selecion.Nombre_Departamento ){
-                    if(empleados.Puesto=="JefeDepartamento")
-                        ArregloJefeDepartameto.push(empleados);
-
-                    else
-                        ArregloEmpleados.push(empleados);
-                }
-            } */
+        mostrar:function(datos){
+            this.info.datosM=datos;
+        },
+        close:function(event){
+            this.info.datosM=null;
         }
     }
 }

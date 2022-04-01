@@ -3,17 +3,15 @@ import Vuex from 'vuex';
 const store = new Vuex.Store({
     state: {
         api: {
-            //name: "http://localhost:8081/",
-            name: "http://10.32.150.91:8081/",
-            key: "3aebc6817c43ee5433194c9c2138cd72",
+            name: "http://localhost:8081/",
+            //name: "http://10.32.150.91:8081/",
         },
         login: {
-            //islogged: sessionStorage.getItem("islogged"),
-            islogged: true,
+            islogged: sessionStorage.getItem("islogged"),
             User_id: sessionStorage.getItem("User_id"),
             User_username: sessionStorage.getItem("User_username"),
             User_rol: sessionStorage.getItem("User_rol"),
-            InitialState: sessionStorage.getItem("InitialState"),
+            User_depto: sessionStorage.getItem("User_depto"),
         },
     },
     mutations: {
@@ -29,26 +27,21 @@ const store = new Vuex.Store({
             state.login.User_username = User_username;
             sessionStorage.setItem("User_username", User_username)
         },
+        setUserDepto(state, User_depto) {
+            state.login.User_depto = User_depto;
+            sessionStorage.setItem("User_depto", User_depto)
+        },
         setUserRol(state, User_rol) {
             state.login.User_rol = User_rol;
             sessionStorage.setItem("User_rol", User_rol)
         },
-        setInitialState(state, InitialState) {
-            state.login.InitialState = InitialState;
-            sessionStorage.setItem("InitialState", InitialState)
-        },
+
     },
     actions: {},
     modules: {},
     getters: {
         getApiName(state) {
             return state.api.name;
-        },
-        getApiKey(state) {
-            return state.api.key;
-        },
-        getInitialState(state) {
-            return state.login.InitialState;
         },
         getLogged(state) {
             return state.login.islogged;
@@ -61,7 +54,11 @@ const store = new Vuex.Store({
         },
         getRol(state) {
             return state.login.User_rol;
+        },
+        getDepto(state) {
+            return state.login.User_depto;
         }
+
     }
 });
 export default store

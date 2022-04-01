@@ -104,13 +104,13 @@
                     </div>
                     <div class="tab-pane" id="tab-03">
                         <div class="mb-3"> 
-                            <label>Responsable del proyecto:</label>
+                            <label>Periodo del proyecto :</label>
                             <select name="Periodo" class="custom-select form-control-sm" v-model="data.Periodo" required >
                                 <option v-for="Periodo in this.list.Periodo" :key="Periodo.idperiodo" :value="Periodo" >{{Periodo.nombre}}</option>
                             </select>
                             <br>
-                            <label>Puesto</label>
-                            <p>{{this.data.PersonalResponsable.puesto}}</p>
+                            <label>Estado</label>
+                            <p>{{this.data.Periodo.status}}</p>
                         </div>  
                         <br>
                         <a data-toggle="tab" class="btn btn-primary" href="#tab-04">Siguiente</a>
@@ -144,7 +144,7 @@
                                 <option value="INACTIVO">INACTIVO</option>                            
                             </select>
                         </div>    
-                        <a data-toggle="tab" class="btn btn-primary" data-dismiss="modal" v-on:click="add" >Siguiente</a>
+                        <a data-toggle="tab" class="btn btn-primary" data-dismiss="modal" v-on:click="add" >Guardar</a>
                     </div>
                 </div>
             </div>
@@ -188,7 +188,9 @@ export default {
                 PersonalResponsable:{
                     puesto:""
                     },
-                Periodo:null
+                Periodo:{
+                    estado:""
+                }
             }
             
 
@@ -226,7 +228,22 @@ export default {
         },      
         add: function(event){
             $('#tab-01').toggleClass('active');        
-            $('#tab-04').toggleClass('active');        
+            $('#tab-04').toggleClass('active');   
+            console.log("Agregar")
+            console.log(this.data)
+
+        },
+        close: function(event){
+                        console.log("Cerrar")
+            this.data.CatalagoProyectos.credito=""
+            this.data.CatalagoProyectos.horassemanales=""
+            this.data.CatalagoProyectos.categoria.nombre=""
+            this.data.departamento.nom_pers=""
+            this.data.PersonalResponsable.puesto=""
+            this.data.Periodo.estado=""
+                        console.log(this.data)
+
+
         }
     }
 

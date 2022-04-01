@@ -51,10 +51,11 @@ export default {
                     this.error.message="Has introducido mal el usuario o la contraseña."
                 }else{
                     this.error=false;
-                    store.commit("setIdUsername",res.data.username)
-                    store.commit("setUsername",res.data.nombre)        
-                    store.commit("setUserRol",res.data.rol)
                     store.commit("setLogged",true)
+                    store.commit("setIdUsername",res.data.username)
+                    store.commit("setUsername",res.data.nombre)  
+                    store.commit("setUserDepto",res.data.ID_DEPTO)                            
+                    store.commit("setUserRol",res.data.rol)
                     
                     location.reload();
                 }

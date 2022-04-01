@@ -143,7 +143,16 @@
           </li>
         </ul>
       </li>
+      <li class="menu--item">
+        <router-link to="/index">
+          <a href="#" class="menu--link" title="Item 2" v-on:click="sessionClose">
+            <i class="menu--icon fa fa-fw fas fa-home"></i>
+            <span class="menu--label">Cerrar Session</span>
+          </a>
+        </router-link>
+      </li>
     </ul>
+
     <button id="collapse_menu" class="collapse_menu">
       <i class="collapse_menu--icon fa fa-fw"></i>
       <span class="collapse_menu--label">Recojer menu</span>
@@ -153,7 +162,10 @@
 </template>
 
 <script>
+import store from "@/store";
+
 export default {
+
   name: "menuAdmin",
   mounted() {
     "use strict";
@@ -209,7 +221,24 @@ export default {
     }, 100);
   },
   setup() {},
-};
+  methods: {
+        sessionClose() {
+          var opcion = confirm("Usted desea cerrar session?");
+            if (opcion == true) { 
+                  sessionStorage.removeItem("islogged");
+                  sessionStorage.removeItem("User_id");
+                  sessionStorage.removeItem("User_username");
+                  sessionStorage.removeItem("User_depto");
+                  sessionStorage.removeItem("User_rol");
+                  store.commit("setLogged", "false")
+                  store.commit("setIdUsername", "")
+                  store.commit("setUsername", "")
+                  store.commit("setUserDepto", "")
+                  store.commit("setUserRol", "")
+            }    
+  }
+  }
+}
 </script>
 
 
