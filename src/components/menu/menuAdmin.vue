@@ -88,8 +88,7 @@
           </li>
           <li class="sub_menu--item">
             <router-link to="/altaProyectos">
-              <a href="#" class="sub_menu--link"
-                >Activades Activas</a>
+              <a href="#" class="sub_menu--link" >Activades Activas</a>
             </router-link>
           </li>
         </ul>

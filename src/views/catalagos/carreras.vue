@@ -1,33 +1,23 @@
 <template>
-    <h1 align="center"> Traspasar Carreras</h1>
+<loading v-model:active="isLoading" :can-cancel="false"  :is-full-page="fullPage"/>
+
+    <h1 align="center">Carreras</h1>
     <br />
     <div class="card">
         <div class="card-body">
             <form>
-                <div class="custom-control custom-control-inline">
-                    <center><button type="button" class="btn btn-primary btn-sm">Traspasar Carreras</button></center>
-                </div>    
-            </form>
-        </div>
-    </div>
-    <br/>
-    <div class="card">
-        <div class="card-body">
-            <form>
-                <table class="table table-sm">
+                <table id="table" class="table table-sm">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Clave Carrera</th>
-                            <th scope="col">Nombre Carrera</th>
-                            <th scope="col">Siglas</th>
-                            <th scope="col">Departamento</th>
-                            <th scope="col" v-if="login.user_role === 'Administrador'" > Modificar</th>
+                            <th >Clave Carrera</th>
+                            <th >Nombre Carrera</th>
+                            <th >Siglas</th>
+                            <th >Departamento</th>
+                            <th  v-if="login.user_role === 'Administrador'" > Modificar</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="carreras in list.carreras" :key="carreras.IdCar">
-                                <th scope="col"></th>
+                        <tr v-for="carreras in carreras" :key="carreras.IdCar">
                                 <td>{{carreras.idcar}} </td>
                                 <td>{{carreras.nombrecar}} </td>
                                 <td>{{carreras.siglas}} </td>
@@ -60,11 +50,9 @@
                 <div class="form-group">
                     <label class="control-label" for="password-01">Departamento</label>
                     <select name="Creditos" class="form-control" v-model="data.deptos.id" required>
-                        <option v-for="departamentos in list.departamentos" :key="departamentos.id_depto" :value="departamentos.id_depto">{{departamentos.nom_depto}}</option>
+                        <option v-for="departamentos in departamentos" :key="departamentos.id_depto" :value="departamentos.id_depto">{{departamentos.nom_depto}}</option>
                     </select>
                 </div>
-                {{data}}
-
             </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="close">Close</button>
@@ -79,18 +67,26 @@
 </template>
 
 <script>
+import "jquery/dist/jquery.min.js";
+import "datatables.net-dt/js/dataTables.dataTables";
+import "datatables.net-dt/css/jquery.dataTables.min.css";
+import 'vue-loading-overlay/dist/vue-loading.css';
 
+import Loading from 'vue-loading-overlay';
 import axios from "axios";
+import $ from "jquery";
+
 import store from "@/store";
 
 export default {
     el: 'app',
+    components: {
+        Loading
+    },
     data () {
         return {
-            list:{
-                carreras:null,
-                departamentos:null,
-            },
+            carreras:null,
+            departamentos:null,
             info: null,
             data:{
                 idcar:"",
@@ -103,29 +99,45 @@ export default {
             },
             login:{
                 user_role:sessionStorage.getItem("User_rol"),
-            }
+            },
+            isLoading: false,
+            fullPage: true
+
         }
     },
     created () {
     this.load();
     },
     methods: {
+
         load: function(event) {
-            let url = store.getters.getApiName + "Catalagos/carreras";
-                axios.get(url)
-                    .then((res) => {
-                        this.list.carreras = res.data.data;
-                    }).catch((err) => {
-                }); 
-            url = store.getters.getApiName + "Catalagos/departamentos";
-                axios.get(url)
-                    .then((res) => {
-                        this.list.departamentos = res.data.data;
-                    }).catch((err) => {
-                });    
+            this.isLoading=true;
+
+            let endpoints = [
+                    store.getters.getApiName + "catalagos/carreras/",
+                    store.getters.getApiName + "catalagos/departamentos/"
+                ];
+            axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
+                    
+                    axios.spread((a, b) => {
+                        
+                        if(Object.keys(a.data.data).length > 0)
+                            this.carreras = a.data.data;
+                        
+                        if(Object.keys(b.data.data).length > 0)
+                            this.departamentos = b.data.data;
+
+                        this.isLoading=false;
+                        this.updated();
+                    })
+                ).catch((err) => {
+                        console.log("AXIOS ERROR: ", err);
+                });
         },
         update:function(event){
-            let url = store.getters.getApiName + "Catalagos/carreras_update";
+            this.isLoading=true;
+
+            let url = store.getters.getApiName + "catalagos/carreras/";
             let data = new FormData();
                     data.append("idcar", this.data.idcar);
                     data.append("nombrecar", this.data.nombrecar);
@@ -134,10 +146,12 @@ export default {
             axios.post(url,data)
                     .then((res) => {
                         if(res.status==200) {
+                            this.isLoading=false;
                             this.load();
                         }
                     });
         },
+
         update_local: function (datos) {
             this.data.idcar=datos.idcar;
             this.data.nombrecar=datos.nombrecar;
@@ -152,6 +166,24 @@ export default {
             this.data.siglas="";
             this.data.deptos.id="";
             this.data.deptos.nombre="";
+        },
+
+        updated: function () {
+            this.$nextTick(function () {
+                $('#table').DataTable({
+                    'destroy'      :true,
+                    'stateSave'   : true,
+                    "responsive": true,
+                    "language": {
+                        "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                    },
+                    "scrollY":        "200px",
+                    "scrollCollapse": true,
+                    "processing": true,
+                    "info":     true,
+                    
+                }).draw();
+        })
         },
     }
 

@@ -23,7 +23,7 @@ import categorias from '@/views/catalagos/categorias.vue'
 //Movimientos
 import catalagoProyecto from '@/views/movimientos/catalagoProyecto.vue'
 import altaProyectos from '@/views/movimientos/altaProyectos.vue'
-
+import inscripcionEstudiantesProyecto from '@/views/movimientos/inscripcionEstudiantesProyecto.vue'
 
 
 const routes = [
@@ -81,6 +81,11 @@ const routes = [
         path: "/altaProyectos",
         name: "altaProyectos",
         component: altaProyectos,
+    },
+    {
+        path: "/inscripcionEstudiantesProyecto",
+        name: "inscripcionEstudiantesProyecto",
+        component: inscripcionEstudiantesProyecto,
     },
 
 ]

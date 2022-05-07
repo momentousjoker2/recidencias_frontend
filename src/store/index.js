@@ -3,8 +3,8 @@ import Vuex from 'vuex';
 const store = new Vuex.Store({
     state: {
         api: {
-            //name: "http://localhost:8081/",
-            name: "http://192.168.1.76:8081/",
+            name: "http://localhost:8081/",
+            //name: "http://192.168.1.76:8081/",
         },
         login: {
             islogged: sessionStorage.getItem("islogged"),

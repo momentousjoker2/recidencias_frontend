@@ -1,4 +1,6 @@
 <template>
+<loading v-model:active="isLoading" :can-cancel="false"  :is-full-page="fullPage"/>
+
 <br/>
     <div class="card">
         <div class="card-body">
@@ -10,20 +12,18 @@
 <div class="card">
     <div class="card-body">
         <h4 class="card-title" align="center">Consultar</h4>
-        <table class="table table-sm">
+        <table id="table" class="table table-sm">
         <thead class="thead-dark">
             <tr>
-                <th scope="col"></th>
-                <th scope="col">Clave:</th>
-                <th scope="col">Nombre:</th>
-                <th scope="col">Status:</th>
-                <th scope="col" v-if="login.user_role === 'Administrador'" > Modificar</th>
+                <th >Clave:</th>
+                <th >Nombre:</th>
+                <th >Status:</th>
+                <th  v-if="login.user_role === 'Administrador'" > Modificar</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="Periodo in info" :key="Periodo.Id_Periodo">
                 
-                <th scope="col"></th>
                 <td>{{Periodo.idperiodo}} </td>
                 <td>{{Periodo.nombre}} </td>
                 <td>{{Periodo.status}} </td>
@@ -71,11 +71,22 @@
 </div>
 </template>
 <script>
+import "jquery/dist/jquery.min.js";
+import "datatables.net-dt/js/dataTables.dataTables";
+import "datatables.net-dt/css/jquery.dataTables.min.css";
+import 'vue-loading-overlay/dist/vue-loading.css';
+
+import Loading from 'vue-loading-overlay';
 import axios from "axios";
+import $ from "jquery";
+
 import store from "@/store";
 
 export default {
     el: 'app',
+    components: {
+        Loading
+    },
     data () {
         return {
             info: null,
@@ -86,7 +97,10 @@ export default {
             },
             login:{
                 user_role:sessionStorage.getItem("User_rol"),
-            }
+            },
+            isLoading: false,
+            fullPage: true
+
         }
     },
     created () {
@@ -94,14 +108,22 @@ export default {
     },  
     methods: {
         load: function(event) {
-                let url = store.getters.getApiName + "Catalagos/periodo";
+                this.isLoading=true;
+
+                let url = store.getters.getApiName + "catalagos/periodo/";
                 axios.get(url)
                     .then((res) => {
                         this.info = res.data.data;
-                    });
+                        this.updated();
+                                    this.isLoading=false;
+
+                    }).catch((err) => {
+                        console.log("AXIOS ERROR: ", err);
+                });
         },
         add: function(event) {
-                let url = store.getters.getApiName + "Catalagos/periodo"; 
+                this.isLoading=true;
+                let url = store.getters.getApiName + "catalagos/periodo/"; 
 
                 let data = new FormData();
                     data.append("Nombre", this.data.nombre);
@@ -110,12 +132,14 @@ export default {
                 axios.post(url,data)
                     .then((res) => {
                         if(res.status==200) {
+                            this.isLoading=false;
                             this.load();
                         }
                     });
         },
         update:function(event){
-            let url = store.getters.getApiName + "Catalagos/periodo_update";
+            this.isLoading=true;
+            let url = store.getters.getApiName + "catalagos/periodo/update/";
             let data = new FormData();
                     data.append("id", this.data.id);
                     data.append("Nombre", this.data.nombre);
@@ -125,6 +149,7 @@ export default {
                     .then((res) => {
                         console.log(res.data);
                         if(res.status==200) {
+                            this.isLoading=false;
                             this.load();
                         }
                     });
@@ -139,6 +164,23 @@ export default {
             this.data.nombre="";
             this.data.status="";
         },
+        updated: function () {
+            this.$nextTick(function () {
+                $('#table').DataTable({
+                    'destroy'      :true,
+                    'stateSave'   : true,
+                    "responsive": true,
+                    "language": {
+                        "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                    },
+                    "scrollY":        "200px",
+                    "scrollCollapse": true,
+                    "processing": true,
+                    "info":     true,
+                    
+                }).draw();
+            })
+        }
     }
 
 }

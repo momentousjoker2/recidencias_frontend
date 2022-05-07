@@ -1,38 +1,40 @@
 <template>
-    <h1 align="center"> Traspasar Alumnos</h1>
-    <br />
-    <div class="card">
-        <div class="card-body">
-                <div class="custom-control custom-control-inline">
-                    <center><button type="button" class="btn btn-primary btn-sm">Traspasar Alumnos</button></center>
-                </div>    
-        </div>
-    </div>
-    <br/>
-    
+<loading v-model:active="isLoading" :can-cancel="false"  :is-full-page="fullPage"/>
+
+    <h1 align="center">Alumnos</h1>
+
     <br/>
     <div class="card">
         <div class="card-body">
             <form>
-                <table class="table table-sm">
-                    <thead class="thead-dark">
+                <table class="table" id="table">
+                    <thead >
                         <tr>
-                            <th scope="col">No. Control</th>
-                            <th scope="col">Nombre Del Alumno</th>
-                            <th scope="col">Semestre</th>
-                            <th scope="col">Carrera</th>
-                            <th scope="col">Actividades</th>
+                            <th >No. Control</th>
+                            <th >Nombre Del Alumno</th>
+                            <th >Semestre</th>
+                            <th >Carrera</th>
+                            <th >Actividades</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="Estudiantes in info.full" :key="Estudiantes.ID " >
-                            <td>{{Estudiantes.ID}} </td>
-                            <td>{{Estudiantes.Nombre }}</td>
-                            <td>{{Estudiantes.semestre}}  </td>
-                            <td>{{Estudiantes.Carrera}}  </td>
-                            <td><button v-on:click="mostrar(Estudiantes)" type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal" >Mostrar</button></td>
+                        <tr v-for="estudiantes in alumnos" :key="estudiantes.ID " >
+                            <td>{{ estudiantes.ID }}</td>
+                            <td>{{ estudiantes.Nombre }}</td>
+                            <td>{{ estudiantes.semestre }}</td>
+                            <td>{{ estudiantes.Carrera }}</td>
+                            <td><button v-on:click="mostrar(estudiantes)" type="button" class="btn btn-primary" data-toggle="modal"  data-keyboard="false" data-backdrop="static" data-target="#exampleModal" >Mostrar</button></td>
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th >No. Control</th>
+                            <th >Nombre Del Alumno</th>
+                            <th >Semestre</th>
+                            <th >Carrera</th>
+                            <th ></th>
+                        </tr>
+                    </tfoot>
                 </table>
             </form>
         </div>
@@ -77,39 +79,42 @@
 </template>
 
 <script>
+import "jquery/dist/jquery.min.js";
+import "datatables.net-dt/js/dataTables.dataTables";
+import "datatables.net-dt/css/jquery.dataTables.min.css";
+import 'vue-loading-overlay/dist/vue-loading.css';
 
+import Loading from 'vue-loading-overlay';
 import axios from "axios";
+import $ from "jquery";
+
 import store from "@/store";
 
 export default {
     el: 'app',
+    components: {
+        Loading
+    },
     data () {
         return {
+            alumnos: [],
+
             info:{
                 full:null,
                 datosM:{
                     Nombre:"",
                     Contador: "",
                 }
-            }
+            },
+            isLoading: false,
+            fullPage: true
+
         }
     },
     store: store,
     created () {
-        let params =
-        {
-            params:{
-                        depto:  store.getters.getDepto,
-                    }
-        }
-
-                let url = store.getters.getApiName + "Catalagos/estudiantes"; 
-                axios.get(url,params)
-                    .then((res) => {
-                        this.info.full = res.data.data;
-                    }) .catch((err) => {
-                        console.log("AXIOS ERROR: ", err);
-                    });       
+        this.load();
+    
     },    
     methods: {
         mostrar:function(datos){
@@ -117,6 +122,52 @@ export default {
         },
         close:function(event){
             this.info.datosM=null;
+        },
+        updated: function () {
+            this.$nextTick(function () {
+                $('#table').DataTable({
+                    'destroy'      :true,
+                    'stateSave'   : false,
+                    "responsive": true,
+                    "language": {
+                        "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                    },
+                    "scrollY":        "200px",
+                    "scrollCollapse": true,
+                    "processing": true,
+                    "info":     true,
+                    initComplete: function () {
+                        this.api().columns().every( function () {
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo( $(column.footer()).empty() )
+                                .on( 'change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                            column
+                                .search( val ? '^'+val+'$' : '', true, false )
+                                .draw();
+                            } );
+                            column.data().unique().sort().each( function ( d, j ) {
+                                select.append( '<option value="'+d+'">'+d+'</option>' )
+                            } );
+                        });
+                    }
+                }).draw();
+        })
+        },
+        load: function () {
+                this.isLoading=true;
+                let url = store.getters.getApiName + "catalagos/alumnos/"; 
+                let data = axios.get(url).then((res) => {
+                    this.alumnos = res.data.data;                 
+                    this.updated();
+                    this.isLoading=false;
+                }).catch((err) => {
+                    console.log("AXIOS ERROR: ", err);
+                });      
         }
     }
 }

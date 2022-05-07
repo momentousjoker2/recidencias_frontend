@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
+// Eliminar este componente import VueSpinners from 'vue-spinners'
+
 
 if (sessionStorage.length === 0) {
     sessionStorage.setItem("islogged", false)

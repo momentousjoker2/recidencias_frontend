@@ -1,26 +1,18 @@
 <template>
-    <h1 align="center">Traspasar Maestros</h1>
-    <br />
-    <div class="card">
-        <div class="card-body">
-            <form>
-                <div class="custom-control custom-control-inline">
-                    <center><button type="button" class="btn btn-primary btn-sm">Traspasar Maestros</button></center>
-                </div>    
-            </form>
-        </div>
-    </div>
+<loading v-model:active="isLoading" :can-cancel="false"  :is-full-page="fullPage"/>
+
+    <h1 align="center">Maestros</h1>
     <br/>
     <div class="card">
         <div class="card-body">
             <form>
-                <table class="table table-sm">
+                <table id="table" class="table table-sm">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Clave Docente</th>
-                            <th scope="col">Nombre Del Docente</th>
-                            <th scope="col">Departamento</th>
-                            <th scope="col">Puesto</th>
+                            <th >Clave Docente</th>
+                            <th >Nombre Del Docente</th>
+                            <th >Departamento</th>
+                            <th >Puesto</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,6 +23,14 @@
                             <td>{{Empleados.puesto}}  </td>
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th >Clave Docente</th>
+                            <th >Nombre Del Docente</th>
+                            <th >Departamento</th>
+                            <th >Puesto</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </form>
         </div>
@@ -38,24 +38,80 @@
 </template>
 
 <script>
+import "jquery/dist/jquery.min.js";
+import "datatables.net-dt/js/dataTables.dataTables";
+import "datatables.net-dt/css/jquery.dataTables.min.css";
+import 'vue-loading-overlay/dist/vue-loading.css';
 
+import Loading from 'vue-loading-overlay';
 import axios from "axios";
+import $ from "jquery";
+
 import store from "@/store";
 
 export default {
     el: 'app',
+    components: {
+        Loading
+    },
     data () {
         return {
-            info: null
+            info: null,
+            isLoading: false,
+            fullPage: true
+
         }
     },
     created () {
-                let url = store.getters.getApiName + "Catalagos/empleados"; 
+            this.isLoading=true;
+
+                let url = store.getters.getApiName + "catalagos/empleados/"; 
                 axios.get(url)
                     .then((res) => {
                         this.info = res.data.data;
+                        this.updated();
+                                    this.isLoading=false;
+
                     }) .catch((err) => {
                     });     
+    },
+    methods: {
+        updated: function () {
+            this.$nextTick(function () {
+                $('#table').DataTable({
+                    'destroy'      :true,
+                    'stateSave'   : true,
+                    "responsive": true,
+                    "language": {
+                        "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                    },
+                    "scrollY":        "200px",
+                    "scrollCollapse": true,
+                    "processing": true,
+                    "info":     true,
+                    initComplete: function () {
+                        this.api().columns().every( function () {
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo( $(column.footer()).empty() )
+                                .on( 'change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                            column
+                                .search( val ? '^'+val+'$' : '', true, false )
+                                .draw();
+                            } );
+                            column.data().unique().sort().each( function ( d, j ) {
+                                select.append( '<option value="'+d+'">'+d+'</option>' )
+                            } );
+                        });
+                    }
+                    
+                }).draw();
+            })
+        }
     }
 
 }

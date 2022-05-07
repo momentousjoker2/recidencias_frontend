@@ -1,13 +1,20 @@
 <template>
+<loading v-model:active="isLoading" :can-cancel="false"  :is-full-page="fullPage"/>
+
 <h4 align="center">Registrar Alumnos a Actividad</h4>
 <br/>
 <div class="card">
     <div class="card-body">
         <h4 class="card-title" align="center">Actividad</h4>
         <form>
+
+            <label class="control-label" for="password-01">Departamento</label>
+            <select name="Creditos" class="form-control" v-model="data.proyecto_forDepto.id" required>
+                <option v-for="departamentos in departamentos" :key="departamentos.id_depto" :value="departamentos.id_depto">{{departamentos.nom_depto}}</option>
+            </select>
             <div class="custom-control custom-control-inline">
                 <label>Nombre:</label>
-                <input type="text" id="Nombre" name="Nombre" v-model="data.Nombre">
+                <input type="text" id="Nombre" name="Nombre" >
             </div>
             <div class="custom-control custom-control-inline">
                 <label>Periodo:</label>
@@ -179,11 +186,89 @@
 <br/>
 </template>
 
+
 <script>
+
+import "jquery/dist/jquery.min.js";
+import "datatables.net-dt/js/dataTables.dataTables";
+import "datatables.net-dt/css/jquery.dataTables.min.css";
+import 'vue-loading-overlay/dist/vue-loading.css';
+
+import Loading from 'vue-loading-overlay';
+import axios from "axios";
+import $ from "jquery";
+
+import store from "@/store";
+
+export default {
+    el: 'app',
+    components: {
+        Loading
+    },
+    data () {
+        return {
+            login:{
+                user_depto:sessionStorage.getItem("User_depto"),
+            },
+            data:{
+                proyecto_forDepto:{}
+            },
+            isLoading: false,
+            fullPage: true,
+
+
+        }
+    },
+    created () {
+        this.cargar();
+    },
+    
+    methods: {  
+        cargar: function(event){
+            this.isLoading=true;
+            
+                let url = store.getters.getApiName + "movimientos/proyectos_activos/forDeptos";
+                axios.get(url,{ params: { iddepto: this.login.user_depto } })
+                    .then((res) => {
+                        this.data.proyecto_forDepto = res.data.data;
+                        this.updated();
+                                    this.isLoading=false;
+
+                    }).catch((err) => {
+                        console.log("AXIOS ERROR: ", err);
+                });
+
+                this.isLoading=false;
+        },   
+        add: function(event){
+
+
+        },
+        updated: function () {
+            this.$nextTick(function () {
+                $('#table').DataTable({
+                    'destroy'      :true,
+                    'stateSave'   : true,
+                    "responsive": true,
+                    "language": {
+                        "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                    },
+                    "scrollY":        "200px",
+                    "scrollCollapse": true,
+                    "processing": true,
+                    "info":     true,
+                    
+                }).draw();
+            })
+        },
+    }
+
+}
 
 </script>
 
 <style>
+
 label{ font-size: small;}
 
 input{ font-size: small;}

@@ -1,4 +1,7 @@
 <template>
+
+<loading v-model:active="isLoading" :can-cancel="false"  :is-full-page="fullPage"/>
+
 <h1 align="center"> Proyecos activos</h1>
     <div class="card">
         <div class="card-body">
@@ -10,34 +13,36 @@
 <div class="card">
         <div class="card-body">
             <form>
-                <table class="table table-sm">
+                <table id="table" class="table table-sm">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">id activida</th>
-                            <th scope="col">departamento</th>
-                            <th scope="col">jefe de departamento</th>
-                            <th scope="col">responsable</th>
-                            <th scope="col">hora inicio</th>
-                            <th scope="col">hora fin</th>
-                            <th scope="col">periodo</th>
-                            <th scope="col">fecha inicio</th>
-                            <th scope="col">fecha cierre</th>
-                            <th scope="col">numero alumnos</th>
-                            <th scope="col">estado</th>
+                            <th >id activida</th>
+                            <th >Nombre del proyecto</th>
+                            <th >departamento</th>
+                            <th >jefe de departamento</th>
+                            <th >responsable</th>
+                            <th >hora inicio</th>
+                            <th >hora fin</th>
+                            <th >periodo</th>
+                            <th >fecha inicio</th>
+                            <th >fecha cierre</th>
+                            <th >numero alumnos</th>
+                            <th >estado</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="proyectos in this.list.Alta_Proyectos" :key="proyectos.idactivida">
-                                <td>{{proyectos.idactivida}} </td>
-                                <td>{{proyectos.departemento.nombre_departamento}} </td>
-                                <td>{{proyectos.jefedepartamento.nombre_jefedepartamento}} </td>
-                                <td>{{proyectos.responsable.nombre_responsable}} </td>
-                                <td>{{proyectos.horainicio}} </td>
-                                <td>{{proyectos.horafin}} </td>
-                                <td>{{proyectos.periodo.nombre_periodo}} </td>
-                                <td>{{proyectos.fechainicio}} </td>
-                                <td>{{proyectos.fechacierre}} </td>
-                                <td>{{proyectos.numeroalumnos}} </td>
+                                <td>{{proyectos.idActividaActiva}} </td>
+                                <td>{{proyectos.nombresproyecto}} </td>
+                                <td>{{proyectos.NOM_DEPTO }} </td>
+                                <td>{{proyectos.jefe  }} </td>
+                                <td>{{proyectos.nom_pers }} </td>
+                                <td>{{proyectos.horaInicio}} </td>
+                                <td>{{proyectos.horaFin}} </td>
+                                <td>{{proyectos.periodo}} </td>
+                                <td>{{proyectos.fechaInicio}} </td>
+                                <td>{{proyectos.fechaCierre}} </td>
+                                <td>{{proyectos.numeroAlumnos}} </td>
                                 <td>{{proyectos.estado}} </td>
                         </tr>
                     </tbody>
@@ -80,14 +85,14 @@
                     <div class="tab-pane" id="tab-02">
                         <div class="mb-3"> 
                             <label>Departamento del proyecto:</label>
-                                <select name="departamento" class="custom-select form-control-sm" v-model="data.departamento" required >
-                                    <option v-for="categoria in this.list.Deptos" :key="categoria.id_depto" :value="categoria" >{{categoria.nom_depto}}</option>
+                                <select name="departamento" class="custom-select form-control-sm" v-model="data.departamento" required @change="selectDeptos(data.departamento)" >
+                                    <option v-for="depto in this.list.Deptos" :key="depto.id_depto" :value="depto" >{{depto.nom_depto}}</option>
                                 </select>
                                 <br>
                         </div>                        
                         <div class="mb-3"> 
                                 <label>Encargado del departamento</label>
-                                <p>{{this.data.departamento.nom_pers}}</p>
+                                <p>{{this.data.jefedepartamento.nom_pers}}</p>
                         </div> 
                         <div class="mb-3"> 
                                 <label>Responsable del proyecto:</label>
@@ -156,23 +161,34 @@
         </div>
     </div>
 </div>
-
 </template>
 
 <script>
 
+import "jquery/dist/jquery.min.js";
+import "datatables.net-dt/js/dataTables.dataTables";
+import "datatables.net-dt/css/jquery.dataTables.min.css";
+import 'vue-loading-overlay/dist/vue-loading.css';
+
+import Loading from 'vue-loading-overlay';
 import axios from "axios";
+import $ from "jquery";
+
 import store from "@/store";
 
 export default {
     el: 'app',
+    components: {
+        Loading
+    },
     data () {
         return {
             list: {
                 CatalagoProyectos:{},
                 Deptos:{},
                 PersonalResponsable:{},
-                Periodo:{}
+                Periodo:{},
+                Alta_Proyectos:{},
             },
             data:{
                 CatalagoProyectos:{
@@ -185,66 +201,128 @@ export default {
                 departamento:{
                     nom_pers:""
                     },
+                jefedepartamento:{
+                    nom_pers:""
+                },
                 PersonalResponsable:{
                     puesto:""
                     },
                 Periodo:{
                     estado:""
                 }
-            }
-            
+            },
+            isLoading: false,
+            fullPage: true
 
         }
     },
     created () {
-        this.load();
-
+        this.cargar();
+        
     },
-    methods: {
-        load: function(event) {
-                let url = store.getters.getApiName + "Catalagos/departamentos/JefeDepartamento";
-                axios.get(url)
-                    .then((res) => {
-                        this.list.Deptos = res.data.data;
-                    });
+    
+    methods: {  
+        cargar: function(event){
+            this.isLoading=true;
+                let endpoints = [
+                    store.getters.getApiName + "catalagos/empleados/EmpleadosDepartamentales",
+                    store.getters.getApiName + "movimientos/catalagos_proyecto/Activos",
+                    store.getters.getApiName + "catalagos/periodo/Activas",
+                    store.getters.getApiName + "movimientos/proyectos_activos/",
+                ];
 
-                url = store.getters.getApiName + "Catalagos/empleados";
-                axios.get(url)
-                    .then((res) => {
-                        this.list.PersonalResponsable = res.data.data;
-                    });
+                axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
+                    
+                    axios.spread((a, b, c, d) => {
+                        
+                        if(Object.keys(a.data.data).length > 0)
+                            this.list.Deptos = a.data.data;
+                        
+                        if(Object.keys(b.data.data).length > 0)
+                            this.list.CatalagoProyectos = b.data.data;
+    
+                        if(Object.keys(c.data.data).length > 0)
+                            this.list.Periodo = c.data.data;
 
-                url = store.getters.getApiName + "Movimientos/Catalagos_Proyecto";
-                axios.get(url)
-                    .then((res) => {
-                        this.list.CatalagoProyectos = res.data.data;
-                    });
-                
-                url = store.getters.getApiName + "Catalagos/periodo";
-                axios.get(url)
-                    .then((res) => {
-                        this.list.Periodo = res.data.data;
-                    });
-        },      
+                        if(Object.keys(d.data.data).length > 0)
+                            this.list.Alta_Proyectos = d.data.data;
+                        
+                        this.isLoading=false;
+                        this.updated();
+                    })
+                    
+                ).catch((err) => {
+                        console.log("AXIOS ERROR: ", err);
+                });
+
+        },   
         add: function(event){
+            this.isLoading=true;
             $('#tab-01').toggleClass('active');        
             $('#tab-04').toggleClass('active');   
-            console.log("Agregar")
-            console.log(this.data)
+            
+            let url = store.getters.getApiName + "movimientos/proyectos_activos/";
+            let data = new FormData();
+                    
+                    data.append("idCatalagoProyectos", this.data.CatalagoProyectos.idactividad);
+                    data.append("idDeptos", this.data.departamento.id_depto);
+                    data.append("idJefeDeptos", this.data.departamento.jefedepartamento.id_pers);
+                    data.append("idPersonalResponsable", this.data.PersonalResponsable.id_pers);
+                    data.append("horaInicio", this.data.horaInicio);
+                    data.append("horaFin", this.data.horaFin);
+                    data.append("idPeriodo", this.data.Periodo.idperiodo);
+                    data.append("fechaInicio", this.data.fechaInicio);
+                    data.append("fechaCierre", this.data.fechaCierre);
+                    data.append("numeroAlumnos", this.data.numeroAlumnos);
+                    data.append("estado", this.data.estatus);
+
+            axios.post(url,data)
+                    .then((res) => {
+                        console.log(res)
+                        if(res.status==200) {
+                            this.close();
+                            this.isLoading=false;
+                            this.cargar();
+                        }
+                    });
+
+
 
         },
+
         close: function(event){
-                        console.log("Cerrar")
             this.data.CatalagoProyectos.credito=""
             this.data.CatalagoProyectos.horassemanales=""
             this.data.CatalagoProyectos.categoria.nombre=""
             this.data.departamento.nom_pers=""
             this.data.PersonalResponsable.puesto=""
             this.data.Periodo.estado=""
-                        console.log(this.data)
-
-
-        }
+    
+        },
+        selectDeptos: function(depto){
+            this.list.PersonalResponsable = depto.empleados,
+            this.data.PersonalResponsable.puesto="";
+            this.data.jefedepartamento.nom_pers=depto.jefedepartamento.nom_pers
+            this.data.departamento.nom_pers=depto.nom_depto
+            this.data.departamento.id_depto=depto.id_depto
+        },
+        updated: function () {
+            this.$nextTick(function () {
+                $('#table').DataTable({
+                    'destroy'      :true,
+                    'stateSave'   : true,
+                    "responsive": true,
+                    "language": {
+                        "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                    },
+                    "scrollY":        "200px",
+                    "scrollCollapse": true,
+                    "processing": true,
+                    "info":     true,
+                    
+                }).draw();
+            })
+        },
     }
 
 }
@@ -257,7 +335,5 @@ label{ font-size: medium;}
 input{ font-size: medium;}
 
 select{ font-size: medium;}
-
- 
 
 </style>
